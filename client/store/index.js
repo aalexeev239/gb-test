@@ -1,8 +1,8 @@
+import {createStore, applyMiddleware} from 'redux';
 
-import { createStore, applyMiddleware } from 'redux'
-
-import { logger } from '../middleware'
-import rootReducer from '../reducers'
+import {api} from '../middleware';
+import rootReducer from '../reducers';
+import createLogger from 'redux-logger';
 
 export default function configure(initialState) {
   const create = window.devToolsExtension
@@ -10,7 +10,7 @@ export default function configure(initialState) {
     : createStore
 
   const createStoreWithMiddleware = applyMiddleware(
-    logger
+    api, createLogger()
   )(create)
 
   const store = createStoreWithMiddleware(rootReducer, initialState)

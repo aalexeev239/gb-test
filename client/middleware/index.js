@@ -1,6 +1,5 @@
-
-import logger from './logger'
+import api from './api';
 
 export {
-  logger
+  api
 }
