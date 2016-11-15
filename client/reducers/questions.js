@@ -1,4 +1,4 @@
-import {LOAD_ALL_QUESTIONS, SUCCESS, START, START_CHALLENGE, GO_NEXT} from '../constants/actions';
+import {LOAD_ALL_QUESTIONS, SUCCESS, START, START_CHALLENGE} from '../constants/actions';
 
 import {handleActions} from 'redux-actions'
 

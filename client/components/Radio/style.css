@@ -1,0 +1,9 @@
+.radio {
+  display: block;
+  margin: 20px 0;
+}
+
+.radio--selected {
+  background-color: #ff0000;
+}
+
