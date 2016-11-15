@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import * as Actions from '../../actions';
@@ -73,13 +72,13 @@ class QuestionList extends Component {
   }
 
   startChallenge() {
-    const {actions, questions} = this.props;
-    actions.startChallenge(questions.items.length);
+    const {questions, startChallenge} = this.props;
+    startChallenge(questions.items.length);
   }
 
   selectAnswer(ev) {
-    const {challenge: {current}, questions, actions} = this.props;
-    actions.selectAnswer({
+    const {challenge: {current}, questions, selectAnswer} = this.props;
+    selectAnswer({
       current,
       question_id: questions.items[current].id,
       answer_id: parseInt(ev.target.value, 10)
@@ -87,23 +86,11 @@ class QuestionList extends Component {
   }
 
   handleNext(ev) {
-    this.props.actions.goNext();
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    challenge: state.challenge
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
+    this.props.goNext();
   }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  ({challenge}) => ({challenge}),
+  Actions
 )(QuestionList);

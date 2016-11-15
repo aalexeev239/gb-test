@@ -14,9 +14,21 @@ import {
   FAIL
 } from '../constants/actions';
 
+const initialState = {
+  status: CHALLENGE_ON + START,
+  total: 0,
+  current: 0,
+  canGoNext: false,
+  validating: false,
+  validated: false,
+  validationFail: false,
+  result: {},
+  answers: []
+};
+
 export default handleActions({
   [START_CHALLENGE]: (state, {payload}) => ({
-    ...state,
+    ...initialState,
     total: payload,
     status: CHALLENGE_ON + PROGRESS
   }),
@@ -67,15 +79,4 @@ export default handleActions({
     validated: false,
     validationFail: true
   })
-}, {
-  // initial state
-  status: CHALLENGE_ON + START,
-  total: 0,
-  current: 0,
-  canGoNext: false,
-  validating: false,
-  validated: false,
-  validationFail: false,
-  result: {},
-  answers: []
-});
+}, initialState);
