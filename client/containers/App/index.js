@@ -2,8 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import QuestionList from '../QuestionList';
-import * as TodoActions from '../../actions/todos';
-import * as TestActions from '../../actions/tests';
+import * as Actions from '../../actions';
 
 
 class App extends Component {
@@ -31,7 +30,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({...TodoActions, ...TestActions}, dispatch)
+    actions: bindActionCreators({...Actions}, dispatch)
   }
 }
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as TestActions from '../../actions/tests';
+import * as Actions from '../../actions';
 
 import Intro from '../../components/Intro';
 import Question from '../../components/Question';
@@ -99,7 +99,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(TestActions, dispatch)
+    actions: bindActionCreators(Actions, dispatch)
   }
 }
 
