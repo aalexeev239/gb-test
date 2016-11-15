@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+import Countdown from '../../components/Countdown';
+
+
 class Intro extends Component {
   render() {
     const {handleClick, isDisabled} = this.props;
