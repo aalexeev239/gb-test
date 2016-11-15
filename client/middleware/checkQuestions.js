@@ -6,7 +6,7 @@ const answers_url = config.urls.answers;
 
 export default store => next => action => {
   if (action.type !== GO_NEXT) {
-    return next(action)
+    return next(action);
   } else {
     const {current, total, answers} = store.getState().challenge;
     const {payload:{...rest}} = action;
@@ -15,7 +15,8 @@ export default store => next => action => {
       return next(action)
     } else {
       next({
-        type: FINISH_CHALLENGE, payload: {
+        type: FINISH_CHALLENGE,
+        payload: {
           ...rest,
           url: answers_url,
           answers

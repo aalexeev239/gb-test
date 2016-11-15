@@ -10,25 +10,21 @@ export default store => next => action => {
       next({type: LOAD_ALL_QUESTIONS + START, payload});
 
       fetch(payload.url)
-        .then(function (response) {
-          return response.json()
-        })
-        .then(function (questions) {
+        .then(response => response.json())
+        .then((questions) => {
           if (questions.length) {
-            const {url, ...rest} = payload;
             next({
               type: LOAD_ALL_QUESTIONS + SUCCESS,
-              payload: {items: questions, ...rest}
+              payload: {items: questions}
             });
           } else {
             throw new Error('Received 0 questions');
           }
         })
         .catch(function (error) {
-          const {url, ...rest} = payload;
           next({
             type: LOAD_ALL_QUESTIONS + FAIL,
-            payload: {error, ...rest}
+            payload: {error}
           });
         });
       break;
@@ -39,10 +35,8 @@ export default store => next => action => {
       next({type: VALIDATION + START, payload});
 
       fetch(payload.url)
-        .then(function (response) {
-          return response.json()
-        })
-        .then(function (answerList) {
+        .then(response => response.json())
+        .then((answerList) => {
           const {url, answers, ...rest} = payload;
           const result = validateAnswers(answers, answerList);
 
@@ -55,10 +49,9 @@ export default store => next => action => {
           }, 1200);
         })
         .catch(function (error) {
-          const {url, ...rest} = payload;
           next({
             type: VALIDATION + FAIL,
-            payload: {error, ...rest}
+            payload: {error}
           });
         });
       break;
