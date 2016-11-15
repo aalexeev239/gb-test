@@ -4098,7 +4098,9 @@ webpackJsonp([1],[
 
 	  // attention!
 	  // order is important
-	  var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_middleware.checkQuestions, _middleware.api, (0, _reduxLogger2.default)())(create);
+	  var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_middleware.checkQuestions,
+	  // countdown,
+	  _middleware.api, (0, _reduxLogger2.default)())(create);
 
 	  var store = createStoreWithMiddleware(_reducers2.default, initialState);
 
@@ -4139,6 +4141,7 @@ webpackJsonp([1],[
 
 	exports.checkQuestions = _checkQuestions2.default;
 	exports.api = _api2.default;
+	// import countdown from './countdown';
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -4295,6 +4298,7 @@ webpackJsonp([1],[
 
 	            var result = validateAnswers(answers, answerList);
 
+	            // simulating server-side validation
 	            setTimeout(function () {
 	              next({
 	                type: _actions.VALIDATION + _actions.SUCCESS,
