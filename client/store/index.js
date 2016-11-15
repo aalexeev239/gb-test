@@ -9,8 +9,10 @@ export default function configure(initialState) {
     ? window.devToolsExtension()(createStore)
     : createStore
 
+  // attention!
+  // order is important
   const createStoreWithMiddleware = applyMiddleware(
-    api, checkQuestions, createLogger()
+    checkQuestions, api, createLogger()
   )(create)
 
   const store = createStoreWithMiddleware(rootReducer, initialState)

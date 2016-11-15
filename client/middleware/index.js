@@ -1,8 +1,8 @@
-import api from './api';
 import checkQuestions from './checkQuestions';
+import api from './api';
 
 
 export {
-  api,
-  checkQuestions
+  checkQuestions,
+  api
 }

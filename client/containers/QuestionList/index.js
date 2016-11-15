@@ -20,7 +20,7 @@ class QuestionList extends Component {
   }
 
   getBody() {
-    const {challenge:{current, status, canGoNext, total, answers}, questions} = this.props;
+    const {challenge:{status, current, canGoNext, total, answers}, questions} = this.props;
 
     switch (status) {
 
@@ -42,12 +42,31 @@ class QuestionList extends Component {
         return (
           <div>
             Тест завершён.
-            Ваш результат:
+            {this.getResult()}
+
+            <button onClick={this.startChallenge.bind(this)}>Пройти ещё раз</button>
           </div>
         );
 
       default:
         return <Intro handleClick={this.startChallenge.bind(this)} isDisabled={!questions.loaded}/>
+    }
+  }
+
+  getResult() {
+    const {validating, validated, validationFail, result} = this.props.challenge;
+
+    if (validated) {
+      return <div>Ваш результат: {result.correct} из {result.total}</div>
+    } else {
+      if (validating) {
+        return <div>Обрабатываем результаты...</div>
+      } else if (validationFail) {
+        return <div>
+          Хьюстон, у нас проблемы: на сервер напали инопланетяне.
+          В пылу яростной битвы мы так и не смогли проверить результаты.
+        </div>
+      }
     }
   }
 
@@ -61,7 +80,7 @@ class QuestionList extends Component {
     actions.selectAnswer({
       current,
       question_id: questions.items[current].id,
-      answer_id: ev.target.value
+      answer_id: parseInt(ev.target.value, 10)
     });
   }
 

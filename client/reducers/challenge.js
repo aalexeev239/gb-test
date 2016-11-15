@@ -6,7 +6,10 @@ import {
   PROGRESS,
   FINISH,
   GO_NEXT,
-  SELECT_ANSWER
+  SELECT_ANSWER,
+  VALIDATION,
+  SUCCESS,
+  FAIL
 } from '../constants/actions';
 
 import {handleActions} from 'redux-actions'
@@ -16,6 +19,10 @@ const initialState = {
   total: 0,
   current: 0,
   canGoNext: false,
+  validating: false,
+  validated: false,
+  validationFail: false,
+  result: {},
   answers: []
 };
 
@@ -23,11 +30,10 @@ let actions = {};
 
 actions[START_CHALLENGE] = (state, action)=> {
 
-  return {
-    ...initialState,
+  return Object.assign({}, initialState, {
     total: action.payload,
     status: CHALLENGE_ON + PROGRESS
-  };
+  })
 };
 
 actions[FINISH_CHALLENGE] = (state)=> {
@@ -38,7 +44,7 @@ actions[FINISH_CHALLENGE] = (state)=> {
 };
 
 
-actions[GO_NEXT] = (state, action)=> {
+actions[GO_NEXT] = (state)=> {
   return {
     ...state,
     canGoNext: false,
@@ -61,5 +67,30 @@ actions[SELECT_ANSWER] = (state, action)=> {
   };
 };
 
+actions[VALIDATION + START] = (state, action)=> {
+  return {
+    ...state,
+    validating: true,
+    validated: false
+  };
+};
+
+actions[VALIDATION + SUCCESS] = (state, action)=> {
+  return {
+    ...state,
+    validating: false,
+    validated: true,
+    result: Object.assign({}, action.payload.result)
+  };
+};
+
+actions[VALIDATION + FAIL] = (state)=> {
+  return {
+    ...state,
+    validating: false,
+    validated: false,
+    validationFail: true
+  };
+};
 
 export default handleActions(actions, initialState);
