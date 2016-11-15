@@ -1,37 +1,28 @@
+import {handleActions} from 'redux-actions';
+
 import {LOAD_ALL_QUESTIONS, SUCCESS, START, START_CHALLENGE} from '../constants/actions';
 
-import {handleActions} from 'redux-actions'
-
-const initialState = {
-  loading: false,
-  loaded: false,
-  items: []
-};
-
-let actions = {};
-
-actions[LOAD_ALL_QUESTIONS + START] = (state, action)=> {
-  return {
+export default handleActions({
+  [LOAD_ALL_QUESTIONS + START]: (state)=> ({
     ...state,
     loading: true
-  };
-};
+  }),
 
-actions[LOAD_ALL_QUESTIONS + SUCCESS] = (state, action)=> {
-  return {
+  [LOAD_ALL_QUESTIONS + SUCCESS]: (state, {payload: {items}})=> ({
     ...state,
     loading: false,
     loaded: true,
-    items: action.payload.items.concat([]),
-    total: action.payload.items.length
-  };
-};
+    items,
+    total: items.length
+  }),
 
-actions[START_CHALLENGE] = (state, action)=> {
-  return {
+  [START_CHALLENGE]: (state)=> ({
     ...state,
     current: 0
-  };
-};
-
-export default handleActions(actions, initialState);
+  })
+}, {
+  // initial state
+  loading: false,
+  loaded: false,
+  items: []
+});

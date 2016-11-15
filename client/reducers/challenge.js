@@ -1,3 +1,5 @@
+import {handleActions} from 'redux-actions';
+
 import {
   CHALLENGE_ON,
   START_CHALLENGE,
@@ -12,9 +14,61 @@ import {
   FAIL
 } from '../constants/actions';
 
-import {handleActions} from 'redux-actions'
+export default handleActions({
+  [START_CHALLENGE]: (state, {payload}) => ({
+    ...state,
+    total: payload,
+    status: CHALLENGE_ON + PROGRESS
+  }),
 
-const initialState = {
+  [FINISH_CHALLENGE]: (state) => ({
+    ...state,
+    status: CHALLENGE_ON + FINISH
+  }),
+
+  [GO_NEXT]: (state) => ({
+    ...state,
+    canGoNext: false,
+    current: state.current + 1
+  }),
+
+  [SELECT_ANSWER]: (state, {payload: {current, question_id, answer_id}}) => {
+    const answer = {
+      answer_id,
+      question_id
+    };
+
+    let answers = state.answers.slice();
+    answers[current] = answer;
+
+    return {
+      ...state,
+      canGoNext: true,
+      answers
+    }
+  },
+
+  [VALIDATION + START]: (state) => ({
+    ...state,
+    validating: true,
+    validated: false
+  }),
+
+  [VALIDATION + SUCCESS]: (state, {payload: {result}}) => ({
+    ...state,
+    validating: false,
+    validated: true,
+    result
+  }),
+
+  [VALIDATION + FAIL]: (state)=> ({
+    ...state,
+    validating: false,
+    validated: false,
+    validationFail: true
+  })
+}, {
+  // initial state
   status: CHALLENGE_ON + START,
   total: 0,
   current: 0,
@@ -24,73 +78,4 @@ const initialState = {
   validationFail: false,
   result: {},
   answers: []
-};
-
-let actions = {};
-
-actions[START_CHALLENGE] = (state, action)=> {
-
-  return Object.assign({}, initialState, {
-    total: action.payload,
-    status: CHALLENGE_ON + PROGRESS
-  })
-};
-
-actions[FINISH_CHALLENGE] = (state)=> {
-  return {
-    ...state,
-    status: CHALLENGE_ON + FINISH
-  };
-};
-
-
-actions[GO_NEXT] = (state)=> {
-  return {
-    ...state,
-    canGoNext: false,
-    current: state.current + 1
-  };
-};
-
-actions[SELECT_ANSWER] = (state, action)=> {
-  const {current, question_id, answer_id} = action.payload;
-  const answer = {
-    answer_id,
-    question_id
-  };
-  let answers = state.answers.slice();
-  answers[current] = answer;
-  return {
-    ...state,
-    canGoNext: true,
-    answers
-  };
-};
-
-actions[VALIDATION + START] = (state, action)=> {
-  return {
-    ...state,
-    validating: true,
-    validated: false
-  };
-};
-
-actions[VALIDATION + SUCCESS] = (state, action)=> {
-  return {
-    ...state,
-    validating: false,
-    validated: true,
-    result: Object.assign({}, action.payload.result)
-  };
-};
-
-actions[VALIDATION + FAIL] = (state)=> {
-  return {
-    ...state,
-    validating: false,
-    validated: false,
-    validationFail: true
-  };
-};
-
-export default handleActions(actions, initialState);
+});
