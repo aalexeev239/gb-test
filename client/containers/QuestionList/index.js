@@ -5,6 +5,8 @@ import * as Actions from '../../actions';
 
 import Intro from '../../components/Intro';
 import Question from '../../components/Question';
+import Result from '../../components/Result';
+
 import Countdown from '../../components/Countdown';
 
 import {CHALLENGE_ON, PROGRESS, FINISH} from '../../constants/actions';
@@ -40,34 +42,10 @@ class QuestionList extends Component {
         );
 
       case CHALLENGE_ON + FINISH:
-        return (
-          <div>
-            Тест завершён.
-            {this.getResult()}
-
-            <button onClick={this.startChallenge.bind(this)}>Пройти ещё раз</button>
-          </div>
-        );
+        return <Result restart={this.startChallenge.bind(this)} challenge={this.props.challenge}/>;
 
       default:
         return <Intro handleClick={this.startChallenge.bind(this)} isDisabled={!questions.loaded}/>
-    }
-  }
-
-  getResult() {
-    const {validating, validated, validationFail, result} = this.props.challenge;
-
-    if (validated) {
-      return <div>Ваш результат: {result.correct} из {result.total}</div>
-    } else {
-      if (validating) {
-        return <div>Обрабатываем результаты...</div>
-      } else if (validationFail) {
-        return <div>
-          Хьюстон, у нас проблемы: на сервер напали инопланетяне.
-          В пылу яростной битвы мы так и не смогли проверить результаты.
-        </div>
-      }
     }
   }
 
