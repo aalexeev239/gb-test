@@ -7,8 +7,12 @@ export const SELECT_ANSWER = 'SELECT_ANSWER';
 export const VALIDATION = 'VALIDATION';
 
 export const START = '_START';
+export const STOP = '_STOP';
 export const PROGRESS = '_PROGRESS';
 
 export const FINISH = '_FINISH';
 export const SUCCESS = '_SUCCESS';
 export const FAIL = '_FAIL';
+
+export const COUNTDOWN = 'COUNTDOWN';
+export const TICK = '_TICK';

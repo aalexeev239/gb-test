@@ -6,6 +6,7 @@ import * as TestActions from '../../actions/tests';
 
 import Intro from '../../components/Intro';
 import Question from '../../components/Question';
+import Countdown from '../../components/Countdown';
 
 import {CHALLENGE_ON, PROGRESS, FINISH} from '../../constants/actions';
 
@@ -33,6 +34,7 @@ class QuestionList extends Component {
               selectedAnswerId={answers[current] ? answers[current].answer_id : null}
             />
             <hr/>
+            <Countdown start={this.handleStartCountdown.bind(this)}/>
             <p>Вопрос {current + 1} из {total}</p>
             <button onClick={this.handleNext.bind(this)} disabled={!canGoNext}>Дальше</button>
           </div>

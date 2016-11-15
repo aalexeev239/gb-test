@@ -68,8 +68,6 @@ export default store => next => action => {
 }
 
 function validateAnswers(answers, answerList) {
-  console.log('--- answers', answers);
-  console.log('--- answerList', answerList);
   const total = answerList.length;
   let correct = 0;
 

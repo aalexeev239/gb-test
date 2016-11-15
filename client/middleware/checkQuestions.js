@@ -1,4 +1,7 @@
 import {GO_NEXT, FINISH_CHALLENGE} from '../constants/actions';
+import {config} from '../config';
+
+const answers_url = config.urls.answers;
 
 
 export default store => next => action => {
@@ -14,7 +17,7 @@ export default store => next => action => {
       next({
         type: FINISH_CHALLENGE, payload: {
           ...rest,
-          url: '/assets/fixtures/answers.json',
+          url: answers_url,
           answers
         }
       });
