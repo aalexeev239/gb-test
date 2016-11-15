@@ -34,7 +34,7 @@ class QuestionList extends Component {
               selectedAnswerId={answers[current] ? answers[current].answer_id : null}
             />
             <hr/>
-            <Countdown start={this.handleStartCountdown.bind(this)}/>
+            <Countdown/>
             <p>Вопрос {current + 1} из {total}</p>
             <button onClick={this.handleNext.bind(this)} disabled={!canGoNext}>Дальше</button>
           </div>
