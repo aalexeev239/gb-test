@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1306,
+    "options": [
+      {
+        "id": 5168,
+        "title": "<p>фрагмент кода содержит ошибку</p>\r\n"
+      }
+    ],
+    "title": "<p>Каким будет результат работы фрагмента программы?</p>\r\n\r\n<pre>\r\n<code class=\"language-cs\">int x = 100;\r\n        do\r\n        {\r\n          Console.Write(\"{0} \", x);\r\n          x = x - 30;\r\n        }\r\n       while (x &gt; 0);</code></pre>\r\n\r\n<p>&nbsp;</p>\r\n",
+    "multiple": false,
+    "subject": [
+      {
+        "id": 10759,
+        "name": "основные понятия и операторы языка с#",
+        "taggings_count": 6123
+      }
+    ],
+    "code": "",
+    "time_last": 1171
+  }
+]
