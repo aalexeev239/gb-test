@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Header from '../../components/Header';
-import MainSection from '../../components/MainSection';
+import QuestionList from '../QuestionList';
 import * as TodoActions from '../../actions/todos';
 import * as TestActions from '../../actions/tests';
-import style from './style.css';
+
 
 class App extends Component {
 
@@ -14,33 +13,19 @@ class App extends Component {
   }
 
   render() {
-    const {todos, actions, children} = this.props;
+    const {questions} = this.props;
     return (
-      <div className={style.normal}>
-        <Header addTodo={actions.addTodo}/>
-        <MainSection todos={todos} actions={actions}/>
-        {this.getBody()}
+      <div>
+        <QuestionList questions={questions}/>
       </div>
     )
   }
-
-  getBody() {
-    const {challenge} = this.props;
-
-    switch (challenge) {
-      default:
-        return <Intro>
-    }
-  }
-
-
 }
 
 function mapStateToProps(state) {
   return {
     todos: state.todos,
-    questions: state.questions,
-    challenge: state.challenge
+    questions: state.questions
   }
 }
 

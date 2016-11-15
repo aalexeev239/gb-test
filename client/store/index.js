@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware} from 'redux';
 
-import {api} from '../middleware';
+import {api, checkQuestions} from '../middleware';
 import rootReducer from '../reducers';
 import createLogger from 'redux-logger';
 
@@ -10,7 +10,7 @@ export default function configure(initialState) {
     : createStore
 
   const createStoreWithMiddleware = applyMiddleware(
-    api, createLogger()
+    api, checkQuestions, createLogger()
   )(create)
 
   const store = createStoreWithMiddleware(rootReducer, initialState)

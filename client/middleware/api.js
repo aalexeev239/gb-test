@@ -11,9 +11,15 @@ export default store => next => action => {
   fetch(url)
     .then(function (response) {
       return response.json()
-    }).then(function (questions) {
-    next({type: LOAD_ALL_QUESTIONS + SUCCESS, payload: {...rest, items: questions}});
-  }).catch(function (error) {
-    next({type: LOAD_ALL_QUESTIONS + FAIL, payload: {...rest, error}});
-  });
+    })
+    .then(function (questions) {
+      if (questions.length) {
+        next({type: LOAD_ALL_QUESTIONS + SUCCESS, payload: {...rest, items: questions}});
+      } else {
+        throw new Error('Received 0 questions');
+      }
+    })
+    .catch(function (error) {
+      next({type: LOAD_ALL_QUESTIONS + FAIL, payload: {...rest}, error: error});
+    });
 }
