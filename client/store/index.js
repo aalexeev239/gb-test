@@ -12,10 +12,13 @@ export default function configure(initialState) {
   // attention!
   // order is important
   const createStoreWithMiddleware = applyMiddleware(
-    checkQuestions, api, createLogger()
-  )(create)
+    checkQuestions,
+    // countdown,
+    api,
+    createLogger()
+  )(create);
 
-  const store = createStoreWithMiddleware(rootReducer, initialState)
+  const store = createStoreWithMiddleware(rootReducer, initialState);
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

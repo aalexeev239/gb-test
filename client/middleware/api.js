@@ -46,6 +46,7 @@ export default store => next => action => {
           const {url, answers, ...rest} = payload;
           const result = validateAnswers(answers, answerList);
 
+          // simulating server-side validation
           setTimeout(function () {
             next({
               type: VALIDATION + SUCCESS,

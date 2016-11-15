@@ -7,15 +7,7 @@ module.exports = {
   context: path.join(__dirname, './client'),
   entry: {
     jsx: './index.js',
-    html: './index.html',
-    vendor: [
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react-router-redux',
-      'redux'
-    ]
+    html: './index.html'
   },
   output: {
     path: path.join(__dirname, './static'),
@@ -65,11 +57,10 @@ module.exports = {
   ],
   plugins: [
     new webpack.ProvidePlugin({
-      'Promise': 'es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602)
+      'Promise': 'es6-promise',
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
     new CopyWebpackPlugin([{from: 'assets', to: 'assets'}]),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
     new webpack.DefinePlugin({
       'process.env': {NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')},
     })
