@@ -20,6 +20,7 @@ class Radio extends Component {
           type="radio"
           name={name}
           id={answer.id}
+          className={style.radio__inp}
           onChange={selectAnswer}
           value={answer.id}
           disabled={isSelected}/>

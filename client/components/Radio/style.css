@@ -7,3 +7,8 @@
   background-color: #ff0000;
 }
 
+.radio__inp {
+  float: left;
+  margin-right: 10px;
+}
+
