@@ -1,4 +1,3 @@
-var rucksack = require('rucksack-css');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var webpack = require('webpack');
 var path = require('path');
@@ -50,11 +49,14 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  postcss: [
-    rucksack({
-      autoprefixer: true
-    })
-  ],
+  postcss: function (webpack) {
+    return [
+      require("postcss-import")({ addDependencyTo: webpack }),
+      require("postcss-cssnext")(),
+      require("postcss-browser-reporter")(),
+      require("postcss-reporter")()
+    ]
+  },
   plugins: [
     new webpack.ProvidePlugin({
       'Promise': 'es6-promise',
