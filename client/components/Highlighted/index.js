@@ -7,8 +7,11 @@ import 'highlightjs/styles/idea.css';
 class Highlighted extends Component {
 
   componentDidMount() {
-    const preList = Array.from(this.htmlContainer.querySelectorAll('pre'));
-    preList.forEach((item)=>{hljs.highlightBlock(item)});
+    this.rehighlight()
+  }
+
+  componentDidUpdate() {
+    this.rehighlight()
   }
 
   render() {
@@ -19,6 +22,13 @@ class Highlighted extends Component {
         ref={(htmlContainer) => this.htmlContainer = htmlContainer}
         dangerouslySetInnerHTML={{__html: html}}></div>
     )
+  }
+
+  rehighlight() {
+    const preList = Array.from(this.htmlContainer.querySelectorAll('pre'));
+    preList.forEach((item) => {
+      hljs.highlightBlock(item)
+    });
   }
 }
 
