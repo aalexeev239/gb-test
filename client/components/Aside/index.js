@@ -15,56 +15,56 @@ export default (props) => (
           <nav className="nav-primary">
             <ul className="nav">
               <li>
-                <a href="/">
+                <a href="#">
                   <svg className="svg-icon icon-main">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-main"></use>
                   </svg>
                   <span>Главная</span></a>
               </li>
               <li>
-                <a href="/courses">
+                <a href="#">
                   <svg className="svg-icon icon-courses">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-courses"></use>
                   </svg>
                   <span>Курсы</span></a>
               </li>
               <li>
-                <a href="/events">
+                <a href="#">
                   <svg className="svg-icon icon-webinar">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-webinar"></use>
                   </svg>
                   <span>Вебинары</span></a>
               </li>
               <li>
-                <a href="/topics">
+                <a href="#">
                   <svg className="svg-icon icon-forum">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-forum"></use>
                   </svg>
                   <span>Форум</span></a>
               </li>
               <li>
-                <a href="/posts">
+                <a href="#">
                   <svg className="svg-icon icon-blog">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-blog"></use>
                   </svg>
                   <span>Блог</span></a>
               </li>
               <li>
-                <a href="/streams">
+                <a href="#">
                   <svg className="svg-icon icon-studying">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-studying"></use>
                   </svg>
                   <span>Обучение</span></a>
               </li>
               <li>
-                <a className="current" href="/tests">
+                <a className="current" href="#">
                   <svg className="svg-icon icon-tests">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-tests"></use>
                   </svg>
                   <span>Тесты</span></a>
               </li>
               <li>
-                <a href="/career">
+                <a href="#">
                   <svg className="svg-icon icon-career">
                     <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-career"></use>
                   </svg>

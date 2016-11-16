@@ -1,12 +1,16 @@
 import React from 'react';
 
-export default ({handleClick, isDisabled})=>(<div>
-  Начать тест
+import style from './style.css';
 
-  <br/>
-  Спойлер: правильными являются все первые варианты ответов
-  <br/>
 
-  <button onClick={handleClick} disabled={isDisabled}>Start</button>
-</div>);
+export default ({handleClick, isDisabled}) => (
+  <div >
+    Начать тест
+
+    <br/>
+    Спойлер: правильными являются все первые варианты ответов
+    <br/>
+
+    <button onClick={handleClick} disabled={isDisabled}>Start</button>
+  </div>);
 
