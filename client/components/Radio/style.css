@@ -1,18 +1,78 @@
 @import "../../styles/variables.css";
 
 .radio {
+  position: relative;
+
   display: block;
-  margin: 20px 0;
-  border: 2px solid #000;
-  color: #F00;
+  margin: 0;
+  padding: 22px 0;
+  padding-left: 60px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  min-height: 64px;
+
+  &:hover {
+    background: #f2f2f6;
+  }
+
+  &:hover &__ind {
+    border-color: #b8c3ce;
+  }
+
+
+  &--selected {
+    cursor: default;
+    background-color: #d7ecfa !important;
+  }
+
+  &--selected &__ind {
+    border-color: #b8c3ce !important;
+
+    &:before {
+      background: var(--c_brand);
+    }
+  }
+
+  &__inp {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &__ind {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    border: 2px solid #ccd4dc;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 6px;
+    }
+  }
+
+  &__html {
+
+    p {
+      margin: 0;
+    }
+
+    pre {
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 
-.radio--selected {
-  background-color: #ff0000;
-}
 
-.radio__inp {
-  float: left;
-  margin-right: 10px;
-}
 

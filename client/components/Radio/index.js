@@ -21,7 +21,8 @@ export default ({selectAnswer, isSelected, answer, name, isEven}) => {
         onChange={selectAnswer}
         value={answer.id}
         disabled={isSelected}/>
-      <span dangerouslySetInnerHTML={{__html: answer.title}}></span>
+      <span className={style.radio__ind}></span>
+      <div className={style['radio__html']} dangerouslySetInnerHTML={{__html: answer.title}}></div>
     </label>
   )
 }

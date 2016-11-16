@@ -3,9 +3,8 @@ import Radio from '../Radio';
 
 export default ({question, selectAnswer, selectedAnswerId}) => {
 
-  const opts = question.options.map((opt, i) => (
+  const opts = question.options.map((opt) => (
     <Radio
-      isEven={i % 2 == 0}
       key={opt.id}
       name={question.id}
       answer={opt}
