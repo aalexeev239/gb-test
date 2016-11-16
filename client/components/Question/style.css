@@ -1,0 +1,13 @@
+@import "../../styles/variables.css";
+@import "../../styles/mixins.css";
+
+.question {
+
+  &__title {
+    @mixin reset-pre-code;
+    margin: 0 0 12px;
+
+    font-size: var(--fz_base);
+    line-height: var(--lh_base);
+  }
+}

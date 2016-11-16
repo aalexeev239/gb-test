@@ -1,16 +1,19 @@
 @import "../../styles/variables.css";
+@import "../../styles/mixins.css";
 
 .radio {
   position: relative;
 
   display: block;
   margin: 0;
-  padding: 22px 0;
+  padding: 20px 0 18px;
   padding-left: 60px;
   border-radius: 3px;
   cursor: pointer;
 
   min-height: 64px;
+
+  color: var(--c_base);
 
   &:hover {
     background: #f2f2f6;
@@ -62,15 +65,7 @@
   }
 
   &__html {
-
-    p {
-      margin: 0;
-    }
-
-    pre {
-      margin: 0;
-      padding: 0;
-    }
+    @mixin reset-pre-code;
   }
 }
 

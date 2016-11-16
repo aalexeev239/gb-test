@@ -12,7 +12,7 @@
 
   &__pagination {
     text-align: right;
-    margin-top: calc(var(--sz_h_footer) - var(--sz_h_pagination));
+    margin-top: calc((var(--sz_h_footer) - var(--sz_h_pagination))/2);
   }
 }
 

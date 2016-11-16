@@ -1,6 +1,8 @@
 import React from 'react';
 import Radio from '../Radio';
 
+import style from './style.css';
+
 export default ({question, selectAnswer, selectedAnswerId}) => {
 
   const opts = question.options.map((opt) => (
@@ -14,8 +16,8 @@ export default ({question, selectAnswer, selectedAnswerId}) => {
   ));
 
   return (
-    <div>
-      <div dangerouslySetInnerHTML={{__html: question.title}}></div>
+      <div className={style['question']}>
+      <div className={style['question__title']} dangerouslySetInnerHTML={{__html: question.title}}></div>
       {opts}
     </div>
   )
