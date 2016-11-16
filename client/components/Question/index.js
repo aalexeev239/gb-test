@@ -2,8 +2,10 @@ import React from 'react';
 import Radio from '../Radio';
 
 export default ({question, selectAnswer, selectedAnswerId}) => {
-  const opts = question.options.map((opt)=>(
+
+  const opts = question.options.map((opt, i) => (
     <Radio
+      isEven={i % 2 == 0}
       key={opt.id}
       name={question.id}
       answer={opt}

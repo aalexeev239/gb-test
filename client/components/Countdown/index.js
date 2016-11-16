@@ -1,5 +1,7 @@
 import React from 'react';
 
+import style from './style.css';
+
 const pad = (time, length) => {
   while (time.length < length) {
     time = '0' + time;
@@ -16,7 +18,7 @@ const format = (time) => {
 };
 
 export default ({time}) => (
-  <div>
-    <p>Time: {format(time)}</p>
+  <div className={style.countdown}>
+    {format(time)}
   </div>
 );

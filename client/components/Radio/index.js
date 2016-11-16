@@ -3,17 +3,16 @@ import classNames from 'classnames';
 import style from './style.css';
 
 
-export default ({selectAnswer, isSelected, answer, name}) => {
+export default ({selectAnswer, isSelected, answer, name, isEven}) => {
 
-  // TODO: remove BEM
-  // BEM + CSS Modules = bad idea
   const labelClass = classNames({
-    [style.radio]: true,
+    [style['radio']]: true,
     [style['radio--selected']]: isSelected
   });
 
   return (
     <label htmlFor={answer.id} className={labelClass}>
+      {isEven}
       <input
         type="radio"
         name={name}

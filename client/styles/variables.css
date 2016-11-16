@@ -8,4 +8,7 @@
   --c_base: #000;
   --c_brand: #4c5d6e;
   --c_muted: #99a8b7;
+
+  --sz_h_footer: 48px;
+  --sz_h_pagination: 40px;
 }

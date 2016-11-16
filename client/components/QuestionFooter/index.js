@@ -12,6 +12,10 @@ export default ({countdown:{time}, challenge:{current, total, canGoNext}, next})
     [style['btn--fullwidth']]: true,
     [style['btn-disabled']]: !canGoNext
   });
+
+  const paginationClasses = classNames(style['pagination'], style['question-footer__pagination']);
+
+
   return (
     <div className={style['question-footer']}>
       <div className="container container-gb footer-stick">
@@ -20,7 +24,7 @@ export default ({countdown:{time}, challenge:{current, total, canGoNext}, next})
             <Countdown time={time}/>
           </div>
           <div className="col-sm-4">
-            <div className={style.pagination}>
+            <div className={paginationClasses}>
               <span className={style.pagination__current}>{current + 1}</span> / {total}
             </div>
           </div>

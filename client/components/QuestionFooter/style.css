@@ -1,5 +1,6 @@
 @import "../../styles/common-blocks/btn.css";
 @import "../../styles/common-blocks/pagination.css";
+@import "../../styles/variables.css";
 
 .question-footer {
   position: fixed;
@@ -8,11 +9,11 @@
   bottom: 0;
   background: #e9edf4;
   padding: 20px 0;
+
+  &__pagination {
+    text-align: right;
+    margin-top: calc(var(--sz_h_footer) - var(--sz_h_pagination));
+  }
 }
 
-.pagination {
-  text-align: right;
-  position: relative;
-  top: 2px;
-}
 

@@ -5,13 +5,13 @@
 
   color: var(--c_muted);
   font-size: var(--fz_base);
-  line-height: 40px;
+  line-height: var(--sz_h_pagination);
 
   &__current {
     display: inline-block;
     vertical-align: baseline;
-    height: 40px;
-    min-width: 40px;
+    height: var(--sz_h_pagination);
+    min-width: var(--sz_h_pagination);
     padding: 0 6px;
     margin-right: 2px;
     border-radius: 20px;
