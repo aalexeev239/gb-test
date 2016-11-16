@@ -1,5 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import Highlighted from '../Highlighted';
+
 import style from './style.css';
 
 
@@ -22,7 +24,8 @@ export default ({selectAnswer, isSelected, answer, name, isEven}) => {
         value={answer.id}
         disabled={isSelected}/>
       <span className={style.radio__ind}></span>
-      <div className={style['radio__html']} dangerouslySetInnerHTML={{__html: answer.title}}></div>
+
+      <Highlighted html={answer.title}/>
     </label>
   )
 }

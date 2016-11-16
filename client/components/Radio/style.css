@@ -1,5 +1,4 @@
 @import "../../styles/variables.css";
-@import "../../styles/mixins.css";
 
 .radio {
   position: relative;
@@ -62,10 +61,6 @@
       height: 12px;
       border-radius: 6px;
     }
-  }
-
-  &__html {
-    @mixin reset-pre-code;
   }
 }
 

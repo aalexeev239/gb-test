@@ -1,0 +1,28 @@
+@import "../../styles/variables.css";
+
+.highlighted {
+
+  p {
+    margin: 0;
+    font-family: var(--ff_base);
+  }
+
+  pre {
+    margin: 0;
+    padding: 0 !important;
+    background-color: transparent !important;
+    border: none;
+    word-break: break-all;
+    word-wrap: break-word;
+
+    font-family: var(--ff_mono);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: var(--lh_base);
+    color: inherit;
+
+    code {
+      font: inherit;
+    }
+  }
+}
