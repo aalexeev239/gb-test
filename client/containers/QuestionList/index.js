@@ -22,7 +22,7 @@ class QuestionList extends Component {
   }
 
   getBody() {
-    const {challenge:{status, current, canGoNext, total, answers}, questions} = this.props;
+    const {challenge:{status, current, canGoNext, total, answers}, questions, countdown:{time}} = this.props;
 
     switch (status) {
 
@@ -35,7 +35,7 @@ class QuestionList extends Component {
               selectedAnswerId={answers[current] ? answers[current].answer_id : null}
             />
             <hr/>
-            <Countdown time={10000}/>
+            <Countdown time={time}/>
             <p>Вопрос {current + 1} из {total}</p>
             <button onClick={this.handleNext.bind(this)} disabled={!canGoNext}>Дальше</button>
           </div>
@@ -63,12 +63,12 @@ class QuestionList extends Component {
     });
   }
 
-  handleNext(ev) {
+  handleNext() {
     this.props.goNext();
   }
 }
 
 export default connect(
-  ({challenge}) => ({challenge}),
+  ({challenge, countdown}) => ({challenge, countdown}),
   Actions
 )(QuestionList);

@@ -1,5 +1,11 @@
 import {LOAD_ALL_QUESTIONS, START, SUCCESS, FAIL, FINISH_CHALLENGE, VALIDATION} from '../constants/actions';
 
+import {config} from '../config';
+
+const questions_url = config.urls.questions;
+const answers_url = config.urls.answers;
+
+
 export default store => next => action => {
 
   const {type, payload} = action;
@@ -9,7 +15,7 @@ export default store => next => action => {
 
       next({type: LOAD_ALL_QUESTIONS + START, payload});
 
-      fetch(payload.url)
+      fetch(questions_url)
         .then(response => response.json())
         .then((questions) => {
           if (questions.length) {
@@ -34,17 +40,18 @@ export default store => next => action => {
       next(action);
       next({type: VALIDATION + START, payload});
 
-      fetch(payload.url)
+      const {challenge: {answers}} = store.getState();
+
+      fetch(answers_url)
         .then(response => response.json())
         .then((answerList) => {
-          const {url, answers, ...rest} = payload;
           const result = validateAnswers(answers, answerList);
 
           // simulating server-side validation
           setTimeout(function () {
             next({
               type: VALIDATION + SUCCESS,
-              payload: {result, ...rest}
+              payload: {result}
             });
           }, 1200);
         })
