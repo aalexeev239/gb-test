@@ -1,13 +1,15 @@
 import React from 'react';
 
+import style from './style.css';
+
 export default ({restart, challenge: {validating, validated, validationFail, result: {correct, total}}}) => {
 
   let text = (<div></div>);
 
   if (validated) {
     text = (<div>
-      Ваш результат: {correct} из {total} <br/>
-      <button onClick={restart}>Пройти ещё раз</button>
+      Ваш результат: {correct} из {total} <br/><br/>
+      <button className={style['btn']} onClick={restart}>Пройти ещё раз</button>
     </div>)
   } else {
     if (validating) {
@@ -24,7 +26,8 @@ export default ({restart, challenge: {validating, validated, validationFail, res
 
   return (
     <div>
-      Тест завершён.
+      <h2 className={style['content__title']}>Тест завершён.</h2>
+      <div className={style['content__text']}></div>
       {text}
     </div>
   )
