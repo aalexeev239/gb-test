@@ -9,24 +9,13 @@ export default () => (
         </svg>
       </a><a href="#">Тесты</a></h2>
       <ul className="nav navbar-nav navbar-right m-n hidden-xs nav-user notifications">
-        <li>
-          <a className="bacics-discount-banner-wrapper"
-             href="#">
-            <div className="bacics-discount-banner">
-              <div className="text">Скидка 20% на любую профессию до 16 ноября
-              </div>
-              <img className="banner"
-                   src="https://d3cq7d0htfl6gn.cloudfront.net/assets/static/after_basics_banner-956410a1642430cb2997aa62b1af6a7fe7845c310a08aeca18b9bbb7f750f706.png"
-                   alt="After basics banner"/></div>
-          </a>
-        </li>
         <li><a href="#" style={{padding: '27px 10px'}}
                className="ng-hide"><span className="badge bg-danger">0</span>
           <svg className="svg-icon icon-cart">
             <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#icon-cart"></use>
           </svg>
         </a></li>
-        <li className="text-center notice-list-wrapper" accepted="false">
+        <li className="text-center notice-list-wrapper">
           <a className="js-notices-link" data-target="#" data-toggle="dropdown" href="#">
 
             <svg className="svg-icon icon-notice">
