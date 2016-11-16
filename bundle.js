@@ -31564,10 +31564,12 @@
 	  (0, _createClass3.default)(Highlighted, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var preList = (0, _from2.default)(this.htmlContainer.querySelectorAll('pre'));
-	      preList.forEach(function (item) {
-	        _highlightjs2.default.highlightBlock(item);
-	      });
+	      this.rehighlight();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      this.rehighlight();
 	    }
 	  }, {
 	    key: 'render',
@@ -31582,6 +31584,14 @@
 	          return _this2.htmlContainer = htmlContainer;
 	        },
 	        dangerouslySetInnerHTML: { __html: html } });
+	    }
+	  }, {
+	    key: 'rehighlight',
+	    value: function rehighlight() {
+	      var preList = (0, _from2.default)(this.htmlContainer.querySelectorAll('pre'));
+	      preList.forEach(function (item) {
+	        _highlightjs2.default.highlightBlock(item);
+	      });
 	    }
 	  }]);
 	  return Highlighted;
