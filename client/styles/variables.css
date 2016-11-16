@@ -1,0 +1,11 @@
+:root {
+  --ff_base: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --ff_mono: 'Consolas', monaco, monospace;
+
+  --fz_base: 18px;
+  --lh_base: 1.5;
+
+  --c_base: #000;
+  --c_brand: #4c5d6e;
+  --c_muted: #99a8b7;
+}

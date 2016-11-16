@@ -6,23 +6,32 @@ import * as Actions from '../../actions';
 import Intro from '../../components/Intro';
 import Question from '../../components/Question';
 import Result from '../../components/Result';
+import QuestionFooter from '../../components/QuestionFooter';
 
-import Countdown from '../../components/Countdown';
 
 import {CHALLENGE_ON, PROGRESS, FINISH} from '../../constants/actions';
+
+import style from "./style.css";
 
 
 class QuestionList extends Component {
   render() {
     return (
-      <div>
+      <div className={style.content}>
+
+        <div className={style.content__nav}>
+          <a href="#" className={style['content__nav-elem']}>Тема: Работа с массивами</a>
+          <a href="#" className={style['content__nav-elem']}>Сообщить об ошибке</a>
+        </div>
+
         {this.getBody()}
       </div>
     )
   }
 
   getBody() {
-    const {challenge:{status, current, canGoNext, total, answers}, questions, countdown:{time}} = this.props;
+    const {challenge, questions, countdown} = this.props;
+    const {challenge:{status, current, answers}} = this.props;
 
     switch (status) {
 
@@ -34,10 +43,11 @@ class QuestionList extends Component {
               selectAnswer={this.selectAnswer.bind(this)}
               selectedAnswerId={answers[current] ? answers[current].answer_id : null}
             />
-            <hr/>
-            <Countdown time={time}/>
-            <p>Вопрос {current + 1} из {total}</p>
-            <button onClick={this.handleNext.bind(this)} disabled={!canGoNext}>Дальше</button>
+            <QuestionFooter
+              challenge={challenge}
+              countdown={countdown}
+              next={this.handleNext.bind(this)}
+            />
           </div>
         );
 

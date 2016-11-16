@@ -1,0 +1,34 @@
+@import '../variables.css';
+.content {
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__nav-elem {
+    color: var(--c_muted);
+    text-decoration: none;
+    font-size: 13px;
+
+    &:hover {
+      color: var(--c_brand);
+      text-decoration: none;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: calc(28 / 20);
+    font-weight: 400;
+    color: var(--c_brand);
+  }
+
+  &__text {
+    font-size: var(--fz_base);
+    line-height: var(--lh_base);
+  }
+}
+
+
+

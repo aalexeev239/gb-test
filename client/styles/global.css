@@ -1,0 +1,11 @@
+/*
+  App-level styles declared here
+*/
+@import "variables.css";
+
+@font-face {
+  font-family: 'Consolas';
+  src: local('Consolas'), url('../assets/fonts/Consolas.woff2') format('woff2'),
+  url('../assets/fonts/Consolas.woff') format('woff');
+}
+

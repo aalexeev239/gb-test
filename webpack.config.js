@@ -44,6 +44,10 @@ module.exports = {
           'babel-loader'
         ]
       },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url'
+      }
     ],
   },
   resolve: {
@@ -51,7 +55,9 @@ module.exports = {
   },
   postcss: function (webpack) {
     return [
-      require("postcss-import")({ addDependencyTo: webpack }),
+      require("postcss-import")({addDependencyTo: webpack}),
+      require('postcss-mixins')(),
+      require("postcss-nested")(),
       require("postcss-cssnext")(),
       require("postcss-browser-reporter")(),
       require("postcss-reporter")()

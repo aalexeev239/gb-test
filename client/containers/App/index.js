@@ -5,6 +5,8 @@ import * as Actions from '../../actions';
 import Header from '../../components/Header';
 import Aside from '../../components/Aside';
 
+import style from './style.css';
+
 
 class App extends Component {
 
@@ -15,7 +17,7 @@ class App extends Component {
   render() {
     const {questions} = this.props;
     return (
-      <div>
+      <div className={style.app}>
         <Aside />
         <Header />
         <div className="container container-gb footer-stick">

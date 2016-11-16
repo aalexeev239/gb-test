@@ -1,0 +1,22 @@
+@import '../variables.css';
+
+.pagination {
+  white-space: nowrap;
+
+  color: var(--c_muted);
+  font-size: var(--fz_base);
+  line-height: 40px;
+
+  &__current {
+    display: inline-block;
+    vertical-align: baseline;
+    height: 40px;
+    min-width: 40px;
+    padding: 0 6px;
+    margin-right: 2px;
+    border-radius: 20px;
+    text-align: center;
+    background: #fff;
+    color: var(--c_base);
+  }
+}

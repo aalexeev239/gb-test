@@ -1,5 +1,41 @@
 [
   {
+    "id": 1,
+    "options": [
+      {
+        "id": 2,
+        "title": "<p><pre>\r\n<code class=\"language-cs\">char[,] A = new char[2, 3];</code></pre>\r\n</p>\r\n"
+      },
+      {
+        "id": 3,
+        "title": "<p><pre>\r\n<code class=\"language-cs\">var c = new char[3, 2];</code></pre>\r\n</p>\r\n"
+      },
+      {
+        "id": 4,
+        "title": "<p><pre>\r\n<code class=\"language-cs\">var B = new char[2, 3] { { '1', '2', '3' }, { '4', '5', '6' } };</code></pre>\r\n</p>\r\n"
+      },
+      {
+        "id": 5,
+        "title": "<p><pre>\r\n<code class=\"language-cs\">var D = new char[{ { '1', '2', '3' }, { '4', '5', '6' } }];</code></pre>\r\n</p>\r\n"
+      },
+      {
+        "id": 6,
+        "title": "<p><pre>\r\n<code class=\"language-cs\">Char[,] E = new Char[2, 3] { { 'a', 'b', 'c' }, { 'a', 'b', 'c' } };</code></pre>\r\n</p>\r\n"
+      }
+    ],
+    "title": "<p>Двумерный массив символов из двух строк и трёх столбцов может б</p>\r\n",
+    "multiple": false,
+    "subject": [
+      {
+        "id": 10759,
+        "name": "основные понятия и операторы языка с#",
+        "taggings_count": 6123
+      }
+    ],
+    "code": "",
+    "time_last": 1171
+  },
+  {
     "id": 1306,
     "options": [
       {

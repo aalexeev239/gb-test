@@ -6,6 +6,8 @@ import React from 'react';
 
 import App from './containers/App';
 import configure from './store';
+import './styles/global.css';
+
 
 const store = configure();
 const history = syncHistoryWithStore(browserHistory, store);

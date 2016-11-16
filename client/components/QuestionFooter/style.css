@@ -1,0 +1,18 @@
+@import "../../styles/common-blocks/btn.css";
+@import "../../styles/common-blocks/pagination.css";
+
+.question-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e9edf4;
+  padding: 20px 0;
+}
+
+.pagination {
+  text-align: right;
+  position: relative;
+  top: 2px;
+}
+
