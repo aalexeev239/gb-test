@@ -5,11 +5,17 @@
   --fz_base: 18px;
   --lh_base: 1.5;
 
+  --fz_small: 16px;
+
   --c_base: #000;
   --c_brand: #4c5d6e;
   --c_muted: #99a8b7;
 
+  --bg_alert: #fff2ca;
+
   --sz_h_footer: 48px;
   --sz_h_pagination: 40px;
+
+  --time: .2s;
 }
 

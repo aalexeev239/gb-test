@@ -34,5 +34,4 @@ export default handleActions({
     isOn: false,
     offset: 0
   }
-)
-;
+);

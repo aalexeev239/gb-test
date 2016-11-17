@@ -3,5 +3,6 @@ export const config = {
   urls: {
     questions: 'assets/fixtures/questions.json',
     answers: 'assets/fixtures/answers.json'
-  }
+  },
+  alertDelay: 6000
 };

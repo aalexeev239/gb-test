@@ -30,7 +30,7 @@ class QuestionList extends Component {
   }
 
   getBody() {
-    const {challenge, questions, countdown} = this.props;
+    const {challenge, questions, countdown, alert} = this.props;
     const {challenge:{status, current, answers}} = this.props;
 
     switch (status) {
@@ -44,6 +44,7 @@ class QuestionList extends Component {
               selectedAnswerId={answers[current] ? answers[current].answer_id : null}
             />
             <QuestionFooter
+              alert={alert}
               challenge={challenge}
               countdown={countdown}
               next={this.handleNext.bind(this)}
@@ -79,6 +80,6 @@ class QuestionList extends Component {
 }
 
 export default connect(
-  ({challenge, countdown}) => ({challenge, countdown}),
+  ({challenge, countdown, alert}) => ({challenge, countdown, alert}),
   Actions
 )(QuestionList);

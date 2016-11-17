@@ -3,10 +3,11 @@ import React from 'react';
 import classNames from "classnames";
 
 import Countdown from '../../components/Countdown';
+import Alert from '../../components/Alert';
 
 import style from './style.css';
 
-export default ({countdown:{time}, challenge:{current, total, canGoNext}, next}) => {
+export default ({countdown:{time}, challenge:{current, total, canGoNext}, next, alert}) => {
   const btnClasses = classNames({
     [style['btn']]: true,
     [style['btn--fullwidth']]: true,
@@ -18,6 +19,7 @@ export default ({countdown:{time}, challenge:{current, total, canGoNext}, next})
 
   return (
     <div className={style['question-footer']}>
+      <Alert alert={alert}/>
       <div className="container container-gb footer-stick">
         <div className="row">
           <div className="col-sm-4">
