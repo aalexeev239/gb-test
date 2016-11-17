@@ -4,7 +4,9 @@ import {
   COUNTDOWN,
   TICK,
   START,
-  STOP
+  STOP,
+  PAUSE,
+  RESUME
 } from '../constants/actions';
 
 import {config} from '../config';
@@ -21,6 +23,17 @@ export default handleActions({
     [COUNTDOWN + STOP]: (state) => ({
       ...state,
       isOn: false
+    }),
+
+    [COUNTDOWN + PAUSE]: (state, {payload: {time}}) => ({
+      ...state,
+      isOn: false
+    }),
+
+    [COUNTDOWN + RESUME]: (state, {payload: {offset}}) => ({
+      ...state,
+      isOn: true,
+      offset
     }),
 
     [COUNTDOWN + TICK]: (state, {payload}) => ({

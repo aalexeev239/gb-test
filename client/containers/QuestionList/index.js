@@ -10,6 +10,8 @@ import QuestionFooter from '../../components/QuestionFooter';
 
 
 import {CHALLENGE_ON, PROGRESS, FINISH} from '../../constants/actions';
+import {ALERT_PAUSE} from '../../constants/alert';
+
 
 import style from "./style.css";
 
@@ -48,6 +50,7 @@ class QuestionList extends Component {
               challenge={challenge}
               countdown={countdown}
               next={this.handleNext.bind(this)}
+              handlePause={this.handlePause.bind(this)}
             />
           </div>
         );
@@ -74,8 +77,26 @@ class QuestionList extends Component {
     });
   }
 
-  handleNext() {
+  handleNext(ev) {
+    if (ev) {
+      ev.preventDefault();
+    }
     this.props.goNext();
+  }
+
+  handlePause(ev) {
+    if (ev) {
+      ev.preventDefault();
+    }
+    const {challenge:{canGoNext}, pauseCoundown, showAlert} = this.props;
+    if (canGoNext) {
+      // todo: implement
+      pauseCoundown(Date.now());
+    } else {
+      showAlert({
+        text: ALERT_PAUSE
+      });
+    }
   }
 }
 

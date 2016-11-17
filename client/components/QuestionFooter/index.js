@@ -7,7 +7,7 @@ import Alert from '../../components/Alert';
 
 import style from './style.css';
 
-export default ({countdown:{time}, challenge:{current, total, canGoNext}, next, alert}) => {
+export default ({countdown:{time}, challenge:{current, total, canGoNext}, next, alert, handlePause}) => {
   const btnClasses = classNames({
     [style['btn']]: true,
     [style['btn--fullwidth']]: true,
@@ -23,7 +23,7 @@ export default ({countdown:{time}, challenge:{current, total, canGoNext}, next, 
       <div className="container container-gb footer-stick">
         <div className="row">
           <div className="col-sm-4">
-            <Countdown time={time}/>
+            <Countdown time={time} handlePause={handlePause}/>
           </div>
           <div className="col-sm-4">
             <div className={paginationClasses}>
@@ -31,7 +31,7 @@ export default ({countdown:{time}, challenge:{current, total, canGoNext}, next, 
             </div>
           </div>
           <div className="col-sm-4">
-            <button className={btnClasses} onClick={next} disabled={!canGoNext}>
+            <button type="button" className={btnClasses} onClick={next} disabled={!canGoNext}>
               Ответить
             </button>
           </div>

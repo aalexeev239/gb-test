@@ -5,11 +5,22 @@ import {config} from '../config';
 
 const {alertDelay} = config;
 
-
 let showTimeout = null;
 
 export default store => next => action => {
   const {type} = action;
+
+  const delayedHide = () => {
+    if (showTimeout) {
+      clearTimeout(showTimeout);
+    }
+
+    showTimeout = setTimeout(() => {
+      next({
+        type: HIDE_ALERT,
+      });
+    }, alertDelay);
+  };
 
   switch (type) {
     case START_CHALLENGE:
@@ -20,19 +31,14 @@ export default store => next => action => {
         }
       });
 
-      if (showTimeout) {
-        clearTimeout(showTimeout);
-      }
+      delayedHide();
+      break;
 
-      showTimeout = setTimeout(() => {
-        next({
-          type: HIDE_ALERT,
-        });
-      }, alertDelay);
-
-      return next(action);
-
-    default:
-      return next(action);
+    case SHOW_ALERT:
+      delayedHide();
+      break;
   }
+
+  return next(action);
 }
+

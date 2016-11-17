@@ -17,12 +17,12 @@ const format = (time) => {
   return `${m} : ${s}`;
 };
 
-export default ({time}) => (
+export default ({time, handlePause}) => (
   <div className={style['countdown']}>
     <div className={style['countdown__time']}>
       {format(time)}
     </div>
-    <button className={style['countdown__btn']}>
+    <button type="button" onClick={handlePause} className={style['countdown__btn']}>
       Pause
     </button>
   </div>

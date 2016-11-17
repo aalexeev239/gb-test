@@ -16,6 +16,8 @@ export const FAIL = '_FAIL';
 
 export const COUNTDOWN = 'COUNTDOWN';
 export const TICK = '_TICK';
+export const PAUSE = '_PAUSE';
+export const RESUME = '_RESUME';
 
 export const SHOW_ALERT = 'SHOW_ALERT';
 export const HIDE_ALERT = 'HIDE_ALERT';
