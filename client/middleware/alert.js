@@ -28,7 +28,7 @@ export default store => next => action => {
         next({
           type: HIDE_ALERT,
         });
-      }, 2000);
+      }, alertDelay);
 
       return next(action);
 
