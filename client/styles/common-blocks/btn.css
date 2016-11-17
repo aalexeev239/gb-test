@@ -24,7 +24,7 @@
   line-height: var(--sz_h_footer);
 
 
-  transition: all time ease-out;
+  transition: all var(--time) ease-out;
   cursor: pointer;
 
   &:hover {
