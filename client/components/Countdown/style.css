@@ -1,19 +1,61 @@
 @import "../../styles/variables.css";
+@import "../../styles/mixins.css";
 
 .countdown {
+  @mixin text-hide;
+
   display: inline-block;
   vertical-align: middle;
-
-  padding: 0 20px;
 
   height: var(--sz_h_footer);
   border-radius: 3px;
 
-  background: #fff;
-  color: #2c2d30;
 
-  line-height: var(--sz_h_footer);
-  font-size: 18px;
   white-space: nowrap;
+
+  &__time {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 20px;
+    line-height: var(--sz_h_footer);
+    font-size: 18px;
+    font-family: (--ff_base);
+    background: #fff;
+    color: #2c2d30;
+  }
+
+  &__btn {
+    position: relative;
+    @mixin clearbtn;
+    width: var(--sz_h_footer);
+    height: var(--sz_h_footer);
+    background: #e0e5ea;
+    color: #b3bcc5;
+    transition: color var(--time), background var(--time),;
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      width: 4px;
+      height: 20px;
+      border: 2px solid;
+      border-radius: 2px;
+      top: calc(var(--sz_h_footer) / 2 - 10px);
+    }
+
+    &::before {
+      left: calc(var(--sz_h_footer) / 2 - 2px - 4px)
+    }
+
+    &::after {
+      left: calc(var(--sz_h_footer) / 2 + 2px)
+    }
+
+    &:hover {
+      color: color(#b3bcc5 b(40%));
+      background: color(#e0e5ea b(10%));
+    }
+  }
 
 }

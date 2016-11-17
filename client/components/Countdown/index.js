@@ -18,7 +18,12 @@ const format = (time) => {
 };
 
 export default ({time}) => (
-  <div className={style.countdown}>
-    {format(time)}
+  <div className={style['countdown']}>
+    <div className={style['countdown__time']}>
+      {format(time)}
+    </div>
+    <button className={style['countdown__btn']}>
+      Pause
+    </button>
   </div>
 );
