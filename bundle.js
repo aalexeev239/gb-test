@@ -66,7 +66,7 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _store = __webpack_require__(409);
+	var _store = __webpack_require__(410);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -28126,15 +28126,15 @@
 
 	var Actions = _interopRequireWildcard(_actions);
 
-	var _Header = __webpack_require__(405);
+	var _Header = __webpack_require__(406);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Aside = __webpack_require__(406);
+	var _Aside = __webpack_require__(407);
 
 	var _Aside2 = _interopRequireDefault(_Aside);
 
-	var _style = __webpack_require__(407);
+	var _style = __webpack_require__(408);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -29773,7 +29773,9 @@
 
 	var _actions2 = __webpack_require__(360);
 
-	var _style = __webpack_require__(403);
+	var _alert = __webpack_require__(403);
+
+	var _style = __webpack_require__(404);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -29841,7 +29843,8 @@
 	              alert: alert,
 	              challenge: challenge,
 	              countdown: countdown,
-	              next: this.handleNext.bind(this)
+	              next: this.handleNext.bind(this),
+	              handlePause: this.handlePause.bind(this)
 	            })
 	          );
 
@@ -29877,8 +29880,31 @@
 	    }
 	  }, {
 	    key: 'handleNext',
-	    value: function handleNext() {
+	    value: function handleNext(ev) {
+	      if (ev) {
+	        ev.preventDefault();
+	      }
 	      this.props.goNext();
+	    }
+	  }, {
+	    key: 'handlePause',
+	    value: function handlePause(ev) {
+	      if (ev) {
+	        ev.preventDefault();
+	      }
+	      var _props4 = this.props,
+	          canGoNext = _props4.challenge.canGoNext,
+	          pauseCoundown = _props4.pauseCoundown,
+	          showAlert = _props4.showAlert;
+
+	      if (canGoNext) {
+	        // todo: implement
+	        pauseCoundown(Date.now());
+	      } else {
+	        showAlert({
+	          text: _alert.ALERT_PAUSE
+	        });
+	      }
 	    }
 	  }]);
 	  return QuestionList;
@@ -29904,7 +29930,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.countdownStart = exports.selectAnswer = exports.goNext = exports.startChallenge = exports.loadAllQuestions = undefined;
+	exports.pauseCoundown = exports.showAlert = exports.selectAnswer = exports.goNext = exports.startChallenge = exports.loadAllQuestions = undefined;
 
 	var _reduxActions = __webpack_require__(348);
 
@@ -29914,7 +29940,8 @@
 	var startChallenge = exports.startChallenge = (0, _reduxActions.createAction)(_actions.START_CHALLENGE);
 	var goNext = exports.goNext = (0, _reduxActions.createAction)(_actions.GO_NEXT);
 	var selectAnswer = exports.selectAnswer = (0, _reduxActions.createAction)(_actions.SELECT_ANSWER);
-	var countdownStart = exports.countdownStart = (0, _reduxActions.createAction)(_actions.COUNTDOWN + _actions.START);
+	var showAlert = exports.showAlert = (0, _reduxActions.createAction)(_actions.SHOW_ALERT);
+	var pauseCoundown = exports.pauseCoundown = (0, _reduxActions.createAction)(_actions.COUNTDOWN + _actions.PAUSE);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -30885,6 +30912,8 @@
 
 	var COUNTDOWN = exports.COUNTDOWN = 'COUNTDOWN';
 	var TICK = exports.TICK = '_TICK';
+	var PAUSE = exports.PAUSE = '_PAUSE';
+	var RESUME = exports.RESUME = '_RESUME';
 
 	var SHOW_ALERT = exports.SHOW_ALERT = 'SHOW_ALERT';
 	var HIDE_ALERT = exports.HIDE_ALERT = 'HIDE_ALERT';
@@ -30974,7 +31003,7 @@
 
 
 	// module
-	exports.push([module.id, ".content___2FlrZ {\n  padding-bottom: 150px;\n}\n/* footer + alert*/\n.content__nav___1Zyga {\n  padding: 17px 0 29px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.content__nav-elem___3adp2 {\n  color: #99a8b7;\n  text-decoration: none;\n  font-size: 13px;\n}\n.content__nav-elem___3adp2:hover {\n  color: #4c5d6e;\n  text-decoration: none;\n}\n.content__title___3hOem {\n  font-size: 24px;\n  line-height: 1.4;\n  font-weight: 400;\n  color: #4c5d6e;\n  margin: 0 0 1em;\n}\n.content__text___333OX {\n  font-size: 18px;\n  line-height: 1.5;\n  margin: 0 0 1em;\n}\n.btn___3_ATJ {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n  display: inline-block;\n  vertical-align: top;\n\n  height: 48px;\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: 48px;\n\n\n  -webkit-transition: all .15s ease-out;\n\n\n  transition: all .15s ease-out;\n  cursor: pointer;\n}\n.btn___3_ATJ:focus {\n  outline: none;\n}\n.btn___3_ATJ:hover {\n  background: #1984c9;\n  color: #fff;\n}\n.btn___3_ATJ:active {\n  background: #1572ad;\n  color: #fff;\n}\n.btn--fullwidth___2LhdE {\n  display: block !important;\n  width: 100%;\n}\n.btn___3_ATJ .svg-icon___1i3qV {\n  width: 20px;\n}\n.btn-disabled___2Ef53 {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n", "", {"version":3,"sources":["/./styles/common-blocks/content.css","/./styles/common-blocks/btn.css","/./styles/mixins.css"],"names":[],"mappings":"AACA;EACE,sBAAsB;CAgCvB;AAhCwB,mBAAmB;AAE1C;EACE,qBAAqB;EACrB,qBAAc;EAAd,qBAAc;EAAd,cAAc;EACd,0BAA+B;MAA/B,uBAA+B;UAA/B,+BAA+B;CAChC;AAED;EACE,eAAsB;EACtB,sBAAsB;EACtB,gBAAgB;CAMjB;AAJC;EACE,eAAsB;EACtB,sBAAsB;CACvB;AAGH;EACE,gBAAgB;EAChB,iBAA2B;EAC3B,iBAAiB;EACjB,eAAsB;EACtB,gBAAgB;CACjB;AAED;EACE,gBAA0B;EAC1B,iBAA4B;EAC5B,gBAAgB;CACjB;AC9BH;ECAE,yBAAiB;KAAjB,sBAAiB;UAAjB,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,UAAU;EACV,iBAAiB;EACjB,mBAAmB;EACnB,qBAAqB;EDJrB,sBAAsB;EACtB,oBAAoB;;EAEpB,aAA2B;EAC3B,gBAAgB;EAChB,aAAa;EACb,mBAAmB;;;EAGnB,oBAAoB;EACpB,YAAY;;EAEZ,mBAAmB;EACnB,sBAAsB;EACtB,oBAAoB;;EAEpB,0BAA0B;EAC1B,gBAAgB;EAChB,kBAAgC;;;EAGhC,sCAAqC;;;EAArC,8BAAqC;EACrC,gBAAgB;CAoBjB;ACpCC;EACE,cAAc;CACf;ADgBD;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,0BAA0B;EAC1B,YAAY;CACb;AAED;EACE,YAAY;CACb;AAGH;EACE,wBAAwB;EACxB,+BAA+B;EAC/B,uBAAuB;EACvB,2BAA2B;CAC5B","file":"style.css","sourcesContent":["@import '../variables.css';\n.content {\n  padding-bottom: 150px; /* footer + alert*/\n\n  &__nav {\n    padding: 17px 0 29px;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  &__nav-elem {\n    color: var(--c_muted);\n    text-decoration: none;\n    font-size: 13px;\n\n    &:hover {\n      color: var(--c_brand);\n      text-decoration: none;\n    }\n  }\n\n  &__title {\n    font-size: 24px;\n    line-height: calc(28 / 20);\n    font-weight: 400;\n    color: var(--c_brand);\n    margin: 0 0 1em;\n  }\n\n  &__text {\n    font-size: var(--fz_base);\n    line-height: var(--lh_base);\n    margin: 0 0 1em;\n  }\n}\n\n\n\n","@import '../variables.css';\n@import '../mixins.css';\n\n.btn {\n  @mixin clearbtn;\n  display: inline-block;\n  vertical-align: top;\n\n  height: var(--sz_h_footer);\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: var(--sz_h_footer);\n\n\n  transition: all var(--time) ease-out;\n  cursor: pointer;\n\n  &:hover {\n    background: #1984c9;\n    color: #fff;\n  }\n\n  &:active {\n    background: #1572ad;\n    color: #fff;\n  }\n\n  &--fullwidth {\n    display: block !important;\n    width: 100%;\n  }\n\n  .svg-icon {\n    width: 20px;\n  }\n}\n\n.btn-disabled {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n","@import \"./variables.css\";\n\n@define-mixin clearbtn {\n  appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n\n  &:focus {\n    outline: none;\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".content___2FlrZ {\n  padding-bottom: 150px;\n}\n/* footer + alert*/\n.content__nav___1Zyga {\n  padding: 17px 0 29px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.content__nav-elem___3adp2 {\n  color: #99a8b7;\n  text-decoration: none;\n  font-size: 13px;\n}\n.content__nav-elem___3adp2:hover {\n  color: #4c5d6e;\n  text-decoration: none;\n}\n.content__title___3hOem {\n  font-size: 24px;\n  line-height: 1.4;\n  font-weight: 400;\n  color: #4c5d6e;\n  margin: 0 0 1em;\n}\n.content__text___333OX {\n  font-size: 18px;\n  line-height: 1.5;\n  margin: 0 0 1em;\n}\n.btn___3_ATJ {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n  display: inline-block;\n  vertical-align: top;\n\n  height: 48px;\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: 48px;\n\n\n  -webkit-transition: all .15s ease-out;\n\n\n  transition: all .15s ease-out;\n  cursor: pointer;\n}\n.btn___3_ATJ:focus {\n  outline: none;\n}\n.btn___3_ATJ:hover {\n  background: #1984c9;\n  color: #fff;\n}\n.btn___3_ATJ:active {\n  background: #1572ad;\n  color: #fff;\n}\n.btn--fullwidth___2LhdE {\n  display: block !important;\n  width: 100%;\n}\n.btn___3_ATJ .svg-icon___1i3qV {\n  width: 20px;\n}\n.btn-disabled___2Ef53 {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n", "", {"version":3,"sources":["/./styles/common-blocks/content.css","/./styles/common-blocks/btn.css","/./styles/mixins.css"],"names":[],"mappings":"AACA;EACE,sBAAsB;CAgCvB;AAhCwB,mBAAmB;AAE1C;EACE,qBAAqB;EACrB,qBAAc;EAAd,qBAAc;EAAd,cAAc;EACd,0BAA+B;MAA/B,uBAA+B;UAA/B,+BAA+B;CAChC;AAED;EACE,eAAsB;EACtB,sBAAsB;EACtB,gBAAgB;CAMjB;AAJC;EACE,eAAsB;EACtB,sBAAsB;CACvB;AAGH;EACE,gBAAgB;EAChB,iBAA2B;EAC3B,iBAAiB;EACjB,eAAsB;EACtB,gBAAgB;CACjB;AAED;EACE,gBAA0B;EAC1B,iBAA4B;EAC5B,gBAAgB;CACjB;AC9BH;ECAE,yBAAiB;KAAjB,sBAAiB;UAAjB,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,UAAU;EACV,iBAAiB;EACjB,mBAAmB;EACnB,qBAAqB;EDJrB,sBAAsB;EACtB,oBAAoB;;EAEpB,aAA2B;EAC3B,gBAAgB;EAChB,aAAa;EACb,mBAAmB;;;EAGnB,oBAAoB;EACpB,YAAY;;EAEZ,mBAAmB;EACnB,sBAAsB;EACtB,oBAAoB;;EAEpB,0BAA0B;EAC1B,gBAAgB;EAChB,kBAAgC;;;EAGhC,sCAAqC;;;EAArC,8BAAqC;EACrC,gBAAgB;CAoBjB;ACpCC;EACE,cAAc;CACf;ADgBD;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,0BAA0B;EAC1B,YAAY;CACb;AAED;EACE,YAAY;CACb;AAGH;EACE,wBAAwB;EACxB,+BAA+B;EAC/B,uBAAuB;EACvB,2BAA2B;CAC5B","file":"style.css","sourcesContent":["@import '../variables.css';\n.content {\n  padding-bottom: 150px; /* footer + alert*/\n\n  &__nav {\n    padding: 17px 0 29px;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  &__nav-elem {\n    color: var(--c_muted);\n    text-decoration: none;\n    font-size: 13px;\n\n    &:hover {\n      color: var(--c_brand);\n      text-decoration: none;\n    }\n  }\n\n  &__title {\n    font-size: 24px;\n    line-height: calc(28 / 20);\n    font-weight: 400;\n    color: var(--c_brand);\n    margin: 0 0 1em;\n  }\n\n  &__text {\n    font-size: var(--fz_base);\n    line-height: var(--lh_base);\n    margin: 0 0 1em;\n  }\n}\n\n\n\n","@import '../variables.css';\n@import '../mixins.css';\n\n.btn {\n  @mixin clearbtn;\n  display: inline-block;\n  vertical-align: top;\n\n  height: var(--sz_h_footer);\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: var(--sz_h_footer);\n\n\n  transition: all var(--time) ease-out;\n  cursor: pointer;\n\n  &:hover {\n    background: #1984c9;\n    color: #fff;\n  }\n\n  &:active {\n    background: #1572ad;\n    color: #fff;\n  }\n\n  &--fullwidth {\n    display: block !important;\n    width: 100%;\n  }\n\n  .svg-icon {\n    width: 20px;\n  }\n}\n\n.btn-disabled {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n","@import \"./variables.css\";\n\n@define-mixin clearbtn {\n  appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n\n  &:focus {\n    outline: none;\n  }\n}\n\n@define-mixin text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0;\n}\n"],"sourceRoot":"webpack://"}]);
 
 	// exports
 	exports.locals = {
@@ -47699,7 +47728,7 @@
 
 
 	// module
-	exports.push([module.id, ".content___9thmz {\n  padding-bottom: 150px;\n}\n/* footer + alert*/\n.content__nav___106s2 {\n  padding: 17px 0 29px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.content__nav-elem___349Bc {\n  color: #99a8b7;\n  text-decoration: none;\n  font-size: 13px;\n}\n.content__nav-elem___349Bc:hover {\n  color: #4c5d6e;\n  text-decoration: none;\n}\n.content__title___2mVAC {\n  font-size: 24px;\n  line-height: 1.4;\n  font-weight: 400;\n  color: #4c5d6e;\n  margin: 0 0 1em;\n}\n.content__text___2U0RB {\n  font-size: 18px;\n  line-height: 1.5;\n  margin: 0 0 1em;\n}\n.btn___3gZzy {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n  display: inline-block;\n  vertical-align: top;\n\n  height: 48px;\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: 48px;\n\n\n  -webkit-transition: all .15s ease-out;\n\n\n  transition: all .15s ease-out;\n  cursor: pointer;\n}\n.btn___3gZzy:focus {\n  outline: none;\n}\n.btn___3gZzy:hover {\n  background: #1984c9;\n  color: #fff;\n}\n.btn___3gZzy:active {\n  background: #1572ad;\n  color: #fff;\n}\n.btn--fullwidth___1B8lI {\n  display: block !important;\n  width: 100%;\n}\n.btn___3gZzy .svg-icon___2veIa {\n  width: 20px;\n}\n.btn-disabled___3svJ1 {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n", "", {"version":3,"sources":["/./styles/common-blocks/content.css","/./styles/common-blocks/btn.css","/./styles/mixins.css"],"names":[],"mappings":"AACA;EACE,sBAAsB;CAgCvB;AAhCwB,mBAAmB;AAE1C;EACE,qBAAqB;EACrB,qBAAc;EAAd,qBAAc;EAAd,cAAc;EACd,0BAA+B;MAA/B,uBAA+B;UAA/B,+BAA+B;CAChC;AAED;EACE,eAAsB;EACtB,sBAAsB;EACtB,gBAAgB;CAMjB;AAJC;EACE,eAAsB;EACtB,sBAAsB;CACvB;AAGH;EACE,gBAAgB;EAChB,iBAA2B;EAC3B,iBAAiB;EACjB,eAAsB;EACtB,gBAAgB;CACjB;AAED;EACE,gBAA0B;EAC1B,iBAA4B;EAC5B,gBAAgB;CACjB;AC9BH;ECAE,yBAAiB;KAAjB,sBAAiB;UAAjB,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,UAAU;EACV,iBAAiB;EACjB,mBAAmB;EACnB,qBAAqB;EDJrB,sBAAsB;EACtB,oBAAoB;;EAEpB,aAA2B;EAC3B,gBAAgB;EAChB,aAAa;EACb,mBAAmB;;;EAGnB,oBAAoB;EACpB,YAAY;;EAEZ,mBAAmB;EACnB,sBAAsB;EACtB,oBAAoB;;EAEpB,0BAA0B;EAC1B,gBAAgB;EAChB,kBAAgC;;;EAGhC,sCAAqC;;;EAArC,8BAAqC;EACrC,gBAAgB;CAoBjB;ACpCC;EACE,cAAc;CACf;ADgBD;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,0BAA0B;EAC1B,YAAY;CACb;AAED;EACE,YAAY;CACb;AAGH;EACE,wBAAwB;EACxB,+BAA+B;EAC/B,uBAAuB;EACvB,2BAA2B;CAC5B","file":"style.css","sourcesContent":["@import '../variables.css';\n.content {\n  padding-bottom: 150px; /* footer + alert*/\n\n  &__nav {\n    padding: 17px 0 29px;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  &__nav-elem {\n    color: var(--c_muted);\n    text-decoration: none;\n    font-size: 13px;\n\n    &:hover {\n      color: var(--c_brand);\n      text-decoration: none;\n    }\n  }\n\n  &__title {\n    font-size: 24px;\n    line-height: calc(28 / 20);\n    font-weight: 400;\n    color: var(--c_brand);\n    margin: 0 0 1em;\n  }\n\n  &__text {\n    font-size: var(--fz_base);\n    line-height: var(--lh_base);\n    margin: 0 0 1em;\n  }\n}\n\n\n\n","@import '../variables.css';\n@import '../mixins.css';\n\n.btn {\n  @mixin clearbtn;\n  display: inline-block;\n  vertical-align: top;\n\n  height: var(--sz_h_footer);\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: var(--sz_h_footer);\n\n\n  transition: all var(--time) ease-out;\n  cursor: pointer;\n\n  &:hover {\n    background: #1984c9;\n    color: #fff;\n  }\n\n  &:active {\n    background: #1572ad;\n    color: #fff;\n  }\n\n  &--fullwidth {\n    display: block !important;\n    width: 100%;\n  }\n\n  .svg-icon {\n    width: 20px;\n  }\n}\n\n.btn-disabled {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n","@import \"./variables.css\";\n\n@define-mixin clearbtn {\n  appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n\n  &:focus {\n    outline: none;\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".content___9thmz {\n  padding-bottom: 150px;\n}\n/* footer + alert*/\n.content__nav___106s2 {\n  padding: 17px 0 29px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n}\n.content__nav-elem___349Bc {\n  color: #99a8b7;\n  text-decoration: none;\n  font-size: 13px;\n}\n.content__nav-elem___349Bc:hover {\n  color: #4c5d6e;\n  text-decoration: none;\n}\n.content__title___2mVAC {\n  font-size: 24px;\n  line-height: 1.4;\n  font-weight: 400;\n  color: #4c5d6e;\n  margin: 0 0 1em;\n}\n.content__text___2U0RB {\n  font-size: 18px;\n  line-height: 1.5;\n  margin: 0 0 1em;\n}\n.btn___3gZzy {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n  display: inline-block;\n  vertical-align: top;\n\n  height: 48px;\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: 48px;\n\n\n  -webkit-transition: all .15s ease-out;\n\n\n  transition: all .15s ease-out;\n  cursor: pointer;\n}\n.btn___3gZzy:focus {\n  outline: none;\n}\n.btn___3gZzy:hover {\n  background: #1984c9;\n  color: #fff;\n}\n.btn___3gZzy:active {\n  background: #1572ad;\n  color: #fff;\n}\n.btn--fullwidth___1B8lI {\n  display: block !important;\n  width: 100%;\n}\n.btn___3gZzy .svg-icon___2veIa {\n  width: 20px;\n}\n.btn-disabled___3svJ1 {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n", "", {"version":3,"sources":["/./styles/common-blocks/content.css","/./styles/common-blocks/btn.css","/./styles/mixins.css"],"names":[],"mappings":"AACA;EACE,sBAAsB;CAgCvB;AAhCwB,mBAAmB;AAE1C;EACE,qBAAqB;EACrB,qBAAc;EAAd,qBAAc;EAAd,cAAc;EACd,0BAA+B;MAA/B,uBAA+B;UAA/B,+BAA+B;CAChC;AAED;EACE,eAAsB;EACtB,sBAAsB;EACtB,gBAAgB;CAMjB;AAJC;EACE,eAAsB;EACtB,sBAAsB;CACvB;AAGH;EACE,gBAAgB;EAChB,iBAA2B;EAC3B,iBAAiB;EACjB,eAAsB;EACtB,gBAAgB;CACjB;AAED;EACE,gBAA0B;EAC1B,iBAA4B;EAC5B,gBAAgB;CACjB;AC9BH;ECAE,yBAAiB;KAAjB,sBAAiB;UAAjB,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,UAAU;EACV,iBAAiB;EACjB,mBAAmB;EACnB,qBAAqB;EDJrB,sBAAsB;EACtB,oBAAoB;;EAEpB,aAA2B;EAC3B,gBAAgB;EAChB,aAAa;EACb,mBAAmB;;;EAGnB,oBAAoB;EACpB,YAAY;;EAEZ,mBAAmB;EACnB,sBAAsB;EACtB,oBAAoB;;EAEpB,0BAA0B;EAC1B,gBAAgB;EAChB,kBAAgC;;;EAGhC,sCAAqC;;;EAArC,8BAAqC;EACrC,gBAAgB;CAoBjB;ACpCC;EACE,cAAc;CACf;ADgBD;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,0BAA0B;EAC1B,YAAY;CACb;AAED;EACE,YAAY;CACb;AAGH;EACE,wBAAwB;EACxB,+BAA+B;EAC/B,uBAAuB;EACvB,2BAA2B;CAC5B","file":"style.css","sourcesContent":["@import '../variables.css';\n.content {\n  padding-bottom: 150px; /* footer + alert*/\n\n  &__nav {\n    padding: 17px 0 29px;\n    display: flex;\n    justify-content: space-between;\n  }\n\n  &__nav-elem {\n    color: var(--c_muted);\n    text-decoration: none;\n    font-size: 13px;\n\n    &:hover {\n      color: var(--c_brand);\n      text-decoration: none;\n    }\n  }\n\n  &__title {\n    font-size: 24px;\n    line-height: calc(28 / 20);\n    font-weight: 400;\n    color: var(--c_brand);\n    margin: 0 0 1em;\n  }\n\n  &__text {\n    font-size: var(--fz_base);\n    line-height: var(--lh_base);\n    margin: 0 0 1em;\n  }\n}\n\n\n\n","@import '../variables.css';\n@import '../mixins.css';\n\n.btn {\n  @mixin clearbtn;\n  display: inline-block;\n  vertical-align: top;\n\n  height: var(--sz_h_footer);\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: var(--sz_h_footer);\n\n\n  transition: all var(--time) ease-out;\n  cursor: pointer;\n\n  &:hover {\n    background: #1984c9;\n    color: #fff;\n  }\n\n  &:active {\n    background: #1572ad;\n    color: #fff;\n  }\n\n  &--fullwidth {\n    display: block !important;\n    width: 100%;\n  }\n\n  .svg-icon {\n    width: 20px;\n  }\n}\n\n.btn-disabled {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n","@import \"./variables.css\";\n\n@define-mixin clearbtn {\n  appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n\n  &:focus {\n    outline: none;\n  }\n}\n\n@define-mixin text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0;\n}\n"],"sourceRoot":"webpack://"}]);
 
 	// exports
 	exports.locals = {
@@ -47761,7 +47790,8 @@
 	      total = _ref$challenge.total,
 	      canGoNext = _ref$challenge.canGoNext,
 	      next = _ref.next,
-	      alert = _ref.alert;
+	      alert = _ref.alert,
+	      handlePause = _ref.handlePause;
 
 	  var btnClasses = (0, _classnames2.default)((_classNames = {}, (0, _defineProperty3.default)(_classNames, _style2.default['btn'], true), (0, _defineProperty3.default)(_classNames, _style2.default['btn--fullwidth'], true), (0, _defineProperty3.default)(_classNames, _style2.default['btn-disabled'], !canGoNext), _classNames));
 
@@ -47780,7 +47810,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-sm-4' },
-	          _react2.default.createElement(_Countdown2.default, { time: time })
+	          _react2.default.createElement(_Countdown2.default, { time: time, handlePause: handlePause })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -47802,7 +47832,7 @@
 	          { className: 'col-sm-4' },
 	          _react2.default.createElement(
 	            'button',
-	            { className: btnClasses, onClick: next, disabled: !canGoNext },
+	            { type: 'button', className: btnClasses, onClick: next, disabled: !canGoNext },
 	            '\u041E\u0442\u0432\u0435\u0442\u0438\u0442\u044C'
 	          )
 	        )
@@ -47851,11 +47881,21 @@
 	};
 
 	exports.default = function (_ref) {
-	  var time = _ref.time;
+	  var time = _ref.time,
+	      handlePause = _ref.handlePause;
 	  return _react2.default.createElement(
 	    'div',
-	    { className: _style2.default.countdown },
-	    format(time)
+	    { className: _style2.default['countdown'] },
+	    _react2.default.createElement(
+	      'div',
+	      { className: _style2.default['countdown__time'] },
+	      format(time)
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      { type: 'button', onClick: handlePause, className: _style2.default['countdown__btn'] },
+	      'Pause'
+	    )
 	  );
 	};
 
@@ -47896,11 +47936,13 @@
 
 
 	// module
-	exports.push([module.id, ".countdown___2ljL7 {\n  display: inline-block;\n  vertical-align: middle;\n\n  padding: 0 20px;\n\n  height: 48px;\n  border-radius: 3px;\n\n  background: #fff;\n  color: #2c2d30;\n\n  line-height: 48px;\n  font-size: 18px;\n  white-space: nowrap;\n\n}\n", "", {"version":3,"sources":["/./components/Countdown/style.css"],"names":[],"mappings":"AAEA;EACE,sBAAsB;EACtB,uBAAuB;;EAEvB,gBAAgB;;EAEhB,aAA2B;EAC3B,mBAAmB;;EAEnB,iBAAiB;EACjB,eAAe;;EAEf,kBAAgC;EAChC,gBAAgB;EAChB,oBAAoB;;CAErB","file":"style.css","sourcesContent":["@import \"../../styles/variables.css\";\n\n.countdown {\n  display: inline-block;\n  vertical-align: middle;\n\n  padding: 0 20px;\n\n  height: var(--sz_h_footer);\n  border-radius: 3px;\n\n  background: #fff;\n  color: #2c2d30;\n\n  line-height: var(--sz_h_footer);\n  font-size: 18px;\n  white-space: nowrap;\n\n}\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".countdown___2ljL7 {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0;\n\n  display: inline-block;\n  vertical-align: middle;\n\n  height: 48px;\n  border-radius: 3px;\n\n\n  white-space: nowrap;\n\n}\n.countdown__time___1mzbq {\n  display: inline-block;\n  vertical-align: middle;\n  padding: 0 20px;\n  line-height: 48px;\n  font-size: 18px;\n  font-family: (--ff_base);\n  background: #fff;\n  color: #2c2d30;\n\n}\n.countdown__btn___15FU3 {\n  position: relative;\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n  width: 48px;\n  height: 48px;\n  background: #e0e5ea;\n  color: #b3bcc5;\n  -webkit-transition: color .15s, background .15s;\n  transition: color .15s, background .15s;\n\n}\n.countdown__btn___15FU3:focus {\n  outline: none;\n\n}\n.countdown__btn___15FU3::before,\n    .countdown__btn___15FU3::after {\n  position: absolute;\n  content: \"\";\n  width: 4px;\n  height: 20px;\n  border: 2px solid;\n  border-radius: 2px;\n  top: 14px;\n\n}\n.countdown__btn___15FU3::before {\n  left: 18px\n\n}\n.countdown__btn___15FU3::after {\n  left: 26px\n\n}\n.countdown__btn___15FU3:hover {\n  color: rgb(162, 162, 162);\n  background: rgb(224, 227, 230);\n\n}\n", "", {"version":3,"sources":["/./components/Countdown/style.css","/./styles/mixins.css"],"names":[],"mappings":"AAGA;ECcE,YAAY;EACZ,mBAAmB;EACnB,kBAAkB;EAClB,8BAA8B;EAC9B,UAAU;;EDfV,sBAAsB;EACtB,uBAAuB;;EAEvB,aAA2B;EAC3B,mBAAmB;;;EAGnB,oBAAoB;;CA+CrB;AA7CC;EACE,sBAAsB;EACtB,uBAAuB;EACvB,gBAAgB;EAChB,kBAAgC;EAChC,gBAAgB;EAChB,yBAAyB;EACzB,iBAAiB;EACjB,eAAe;;CAChB;AAED;EACE,mBAAmB;ECxBrB,yBAAiB;KAAjB,sBAAiB;UAAjB,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,UAAU;EACV,iBAAiB;EACjB,mBAAmB;EACnB,qBAAqB;EDoBnB,YAA0B;EAC1B,aAA2B;EAC3B,oBAAoB;EACpB,eAAe;EACf,gDAAuD;EAAvD,wCAAuD;;CAyBxD;AC/CD;EACE,cAAc;;CACf;ADsBC;;EAEE,mBAAmB;EACnB,YAAY;EACZ,WAAW;EACX,aAAa;EACb,kBAAkB;EAClB,mBAAmB;EACnB,UAAyC;;CAC1C;AAED;EACE,UAA8C;;CAC/C;AAED;EACE,UAAwC;;CACzC;AAED;EACE,0BAA6B;EAC7B,+BAAkC;;CACnC","file":"style.css","sourcesContent":["@import \"../../styles/variables.css\";\n@import \"../../styles/mixins.css\";\n\n.countdown {\n  @mixin text-hide;\n\n  display: inline-block;\n  vertical-align: middle;\n\n  height: var(--sz_h_footer);\n  border-radius: 3px;\n\n\n  white-space: nowrap;\n\n  &__time {\n    display: inline-block;\n    vertical-align: middle;\n    padding: 0 20px;\n    line-height: var(--sz_h_footer);\n    font-size: 18px;\n    font-family: (--ff_base);\n    background: #fff;\n    color: #2c2d30;\n  }\n\n  &__btn {\n    position: relative;\n    @mixin clearbtn;\n    width: var(--sz_h_footer);\n    height: var(--sz_h_footer);\n    background: #e0e5ea;\n    color: #b3bcc5;\n    transition: color var(--time), background var(--time),;\n\n    &::before,\n    &::after {\n      position: absolute;\n      content: \"\";\n      width: 4px;\n      height: 20px;\n      border: 2px solid;\n      border-radius: 2px;\n      top: calc(var(--sz_h_footer) / 2 - 10px);\n    }\n\n    &::before {\n      left: calc(var(--sz_h_footer) / 2 - 2px - 4px)\n    }\n\n    &::after {\n      left: calc(var(--sz_h_footer) / 2 + 2px)\n    }\n\n    &:hover {\n      color: color(#b3bcc5 b(40%));\n      background: color(#e0e5ea b(10%));\n    }\n  }\n\n}\n","@import \"./variables.css\";\n\n@define-mixin clearbtn {\n  appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n\n  &:focus {\n    outline: none;\n  }\n}\n\n@define-mixin text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0;\n}\n"],"sourceRoot":"webpack://"}]);
 
 	// exports
 	exports.locals = {
-		"countdown": "countdown___2ljL7"
+		"countdown": "countdown___2ljL7",
+		"countdown__time": "countdown__time___1mzbq",
+		"countdown__btn": "countdown__btn___15FU3"
 	};
 
 /***/ },
@@ -48034,7 +48076,7 @@
 
 
 	// module
-	exports.push([module.id, ".btn___10MLX {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n  display: inline-block;\n  vertical-align: top;\n\n  height: 48px;\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: 48px;\n\n\n  -webkit-transition: all .15s ease-out;\n\n\n  transition: all .15s ease-out;\n  cursor: pointer;\n}\n.btn___10MLX:focus {\n  outline: none;\n}\n.btn___10MLX:hover {\n  background: #1984c9;\n  color: #fff;\n}\n.btn___10MLX:active {\n  background: #1572ad;\n  color: #fff;\n}\n.btn--fullwidth___UliNi {\n  display: block !important;\n  width: 100%;\n}\n.btn___10MLX .svg-icon___BJ0pQ {\n  width: 20px;\n}\n.btn-disabled___2CzvN {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n.pagination___1hC_Z {\n  white-space: nowrap;\n\n  color: #99a8b7;\n  font-size: 18px;\n  line-height: 40px;\n}\n.pagination__current___212V3 {\n  display: inline-block;\n  vertical-align: baseline;\n  height: 40px;\n  min-width: 40px;\n  padding: 0 6px;\n  margin-right: 3px;\n  border-radius: 20px;\n  text-align: center;\n  background: #fff;\n  color: #000;\n}\n.question-footer___1BT1A {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e9edf4;\n  padding: 24px 0;\n}\n.question-footer__pagination___BnV8E {\n  text-align: right;\n  margin-top: 4px;\n}\n\n\n", "", {"version":3,"sources":["/./styles/common-blocks/btn.css","/./styles/mixins.css","/./styles/common-blocks/pagination.css","/./components/QuestionFooter/style.css"],"names":[],"mappings":"AAGA;ECAE,yBAAiB;KAAjB,sBAAiB;UAAjB,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,UAAU;EACV,iBAAiB;EACjB,mBAAmB;EACnB,qBAAqB;EDJrB,sBAAsB;EACtB,oBAAoB;;EAEpB,aAA2B;EAC3B,gBAAgB;EAChB,aAAa;EACb,mBAAmB;;;EAGnB,oBAAoB;EACpB,YAAY;;EAEZ,mBAAmB;EACnB,sBAAsB;EACtB,oBAAoB;;EAEpB,0BAA0B;EAC1B,gBAAgB;EAChB,kBAAgC;;;EAGhC,sCAAqC;;;EAArC,8BAAqC;EACrC,gBAAgB;CAoBjB;ACpCC;EACE,cAAc;CACf;ADgBD;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,0BAA0B;EAC1B,YAAY;CACb;AAED;EACE,YAAY;CACb;AAGH;EACE,wBAAwB;EACxB,+BAA+B;EAC/B,uBAAuB;EACvB,2BAA2B;CAC5B;AEpDD;EACE,oBAAoB;;EAEpB,eAAsB;EACtB,gBAA0B;EAC1B,kBAAoC;CAcrC;AAZC;EACE,sBAAsB;EACtB,yBAAyB;EACzB,aAA+B;EAC/B,gBAAkC;EAClC,eAAe;EACf,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,iBAAiB;EACjB,YAAqB;CACtB;AChBH;EACE,gBAAgB;EAChB,QAAQ;EACR,SAAS;EACT,UAAU;EACV,oBAAoB;EACpB,gBAAgB;CAMjB;AAJC;EACE,kBAAkB;EAClB,gBAAkE;CACnE","file":"style.css","sourcesContent":["@import '../variables.css';\n@import '../mixins.css';\n\n.btn {\n  @mixin clearbtn;\n  display: inline-block;\n  vertical-align: top;\n\n  height: var(--sz_h_footer);\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: var(--sz_h_footer);\n\n\n  transition: all var(--time) ease-out;\n  cursor: pointer;\n\n  &:hover {\n    background: #1984c9;\n    color: #fff;\n  }\n\n  &:active {\n    background: #1572ad;\n    color: #fff;\n  }\n\n  &--fullwidth {\n    display: block !important;\n    width: 100%;\n  }\n\n  .svg-icon {\n    width: 20px;\n  }\n}\n\n.btn-disabled {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n","@import \"./variables.css\";\n\n@define-mixin clearbtn {\n  appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n\n  &:focus {\n    outline: none;\n  }\n}\n","@import '../variables.css';\n\n.pagination {\n  white-space: nowrap;\n\n  color: var(--c_muted);\n  font-size: var(--fz_base);\n  line-height: var(--sz_h_pagination);\n\n  &__current {\n    display: inline-block;\n    vertical-align: baseline;\n    height: var(--sz_h_pagination);\n    min-width: var(--sz_h_pagination);\n    padding: 0 6px;\n    margin-right: 3px;\n    border-radius: 20px;\n    text-align: center;\n    background: #fff;\n    color: var(--c_base);\n  }\n}\n","@import \"../../styles/common-blocks/btn.css\";\n@import \"../../styles/common-blocks/pagination.css\";\n@import \"../../styles/variables.css\";\n\n.question-footer {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e9edf4;\n  padding: 24px 0;\n\n  &__pagination {\n    text-align: right;\n    margin-top: calc((var(--sz_h_footer) - var(--sz_h_pagination))/2);\n  }\n}\n\n\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".btn___10MLX {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n  display: inline-block;\n  vertical-align: top;\n\n  height: 48px;\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: 48px;\n\n\n  -webkit-transition: all .15s ease-out;\n\n\n  transition: all .15s ease-out;\n  cursor: pointer;\n}\n.btn___10MLX:focus {\n  outline: none;\n}\n.btn___10MLX:hover {\n  background: #1984c9;\n  color: #fff;\n}\n.btn___10MLX:active {\n  background: #1572ad;\n  color: #fff;\n}\n.btn--fullwidth___UliNi {\n  display: block !important;\n  width: 100%;\n}\n.btn___10MLX .svg-icon___BJ0pQ {\n  width: 20px;\n}\n.btn-disabled___2CzvN {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n.pagination___1hC_Z {\n  white-space: nowrap;\n\n  color: #99a8b7;\n  font-size: 18px;\n  line-height: 40px;\n}\n.pagination__current___212V3 {\n  display: inline-block;\n  vertical-align: baseline;\n  height: 40px;\n  min-width: 40px;\n  padding: 0 6px;\n  margin-right: 3px;\n  border-radius: 20px;\n  text-align: center;\n  background: #fff;\n  color: #000;\n}\n.question-footer___1BT1A {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e9edf4;\n  padding: 24px 0;\n}\n.question-footer__pagination___BnV8E {\n  text-align: right;\n  margin-top: 4px;\n}\n\n\n", "", {"version":3,"sources":["/./styles/common-blocks/btn.css","/./styles/mixins.css","/./styles/common-blocks/pagination.css","/./components/QuestionFooter/style.css"],"names":[],"mappings":"AAGA;ECAE,yBAAiB;KAAjB,sBAAiB;UAAjB,iBAAiB;EACjB,UAAU;EACV,WAAW;EACX,UAAU;EACV,iBAAiB;EACjB,mBAAmB;EACnB,qBAAqB;EDJrB,sBAAsB;EACtB,oBAAoB;;EAEpB,aAA2B;EAC3B,gBAAgB;EAChB,aAAa;EACb,mBAAmB;;;EAGnB,oBAAoB;EACpB,YAAY;;EAEZ,mBAAmB;EACnB,sBAAsB;EACtB,oBAAoB;;EAEpB,0BAA0B;EAC1B,gBAAgB;EAChB,kBAAgC;;;EAGhC,sCAAqC;;;EAArC,8BAAqC;EACrC,gBAAgB;CAoBjB;ACpCC;EACE,cAAc;CACf;ADgBD;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,oBAAoB;EACpB,YAAY;CACb;AAED;EACE,0BAA0B;EAC1B,YAAY;CACb;AAED;EACE,YAAY;CACb;AAGH;EACE,wBAAwB;EACxB,+BAA+B;EAC/B,uBAAuB;EACvB,2BAA2B;CAC5B;AEpDD;EACE,oBAAoB;;EAEpB,eAAsB;EACtB,gBAA0B;EAC1B,kBAAoC;CAcrC;AAZC;EACE,sBAAsB;EACtB,yBAAyB;EACzB,aAA+B;EAC/B,gBAAkC;EAClC,eAAe;EACf,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,iBAAiB;EACjB,YAAqB;CACtB;AChBH;EACE,gBAAgB;EAChB,QAAQ;EACR,SAAS;EACT,UAAU;EACV,oBAAoB;EACpB,gBAAgB;CAMjB;AAJC;EACE,kBAAkB;EAClB,gBAAkE;CACnE","file":"style.css","sourcesContent":["@import '../variables.css';\n@import '../mixins.css';\n\n.btn {\n  @mixin clearbtn;\n  display: inline-block;\n  vertical-align: top;\n\n  height: var(--sz_h_footer);\n  padding: 0 40px;\n  border: none;\n  border-radius: 4px;\n\n\n  background: #177bbb;\n  color: #fff;\n\n  text-align: center;\n  text-decoration: none;\n  white-space: nowrap;\n\n  text-transform: uppercase;\n  font-size: 16px;\n  line-height: var(--sz_h_footer);\n\n\n  transition: all var(--time) ease-out;\n  cursor: pointer;\n\n  &:hover {\n    background: #1984c9;\n    color: #fff;\n  }\n\n  &:active {\n    background: #1572ad;\n    color: #fff;\n  }\n\n  &--fullwidth {\n    display: block !important;\n    width: 100%;\n  }\n\n  .svg-icon {\n    width: 20px;\n  }\n}\n\n.btn-disabled {\n  opacity: .65 !important;\n  background: #177bbb !important;\n  color: #fff !important;\n  cursor: default !important;\n}\n","@import \"./variables.css\";\n\n@define-mixin clearbtn {\n  appearance: none;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  background: none;\n  font-size: inherit;\n  line-height: inherit;\n\n  &:focus {\n    outline: none;\n  }\n}\n\n@define-mixin text-hide {\n  font: 0/0 a;\n  color: transparent;\n  text-shadow: none;\n  background-color: transparent;\n  border: 0;\n}\n","@import '../variables.css';\n\n.pagination {\n  white-space: nowrap;\n\n  color: var(--c_muted);\n  font-size: var(--fz_base);\n  line-height: var(--sz_h_pagination);\n\n  &__current {\n    display: inline-block;\n    vertical-align: baseline;\n    height: var(--sz_h_pagination);\n    min-width: var(--sz_h_pagination);\n    padding: 0 6px;\n    margin-right: 3px;\n    border-radius: 20px;\n    text-align: center;\n    background: #fff;\n    color: var(--c_base);\n  }\n}\n","@import \"../../styles/common-blocks/btn.css\";\n@import \"../../styles/common-blocks/pagination.css\";\n@import \"../../styles/variables.css\";\n\n.question-footer {\n  position: fixed;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: #e9edf4;\n  padding: 24px 0;\n\n  &__pagination {\n    text-align: right;\n    margin-top: calc((var(--sz_h_footer) - var(--sz_h_pagination))/2);\n  }\n}\n\n\n"],"sourceRoot":"webpack://"}]);
 
 	// exports
 	exports.locals = {
@@ -48052,10 +48094,26 @@
 /* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var ALERT_START_CHALLENGE = exports.ALERT_START_CHALLENGE = 'Тестирование началось';
+	var ALERT_PAUSE = exports.ALERT_PAUSE = 'Остановить таймер можно лишь после выбора ответа';
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "alert.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 404 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(404);
+	var content = __webpack_require__(405);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(365)(content, {});
@@ -48075,7 +48133,7 @@
 	}
 
 /***/ },
-/* 404 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(364)();
@@ -48095,7 +48153,7 @@
 	};
 
 /***/ },
-/* 405 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48310,7 +48368,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 406 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48514,13 +48572,13 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 407 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(408);
+	var content = __webpack_require__(409);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(365)(content, {});
@@ -48540,7 +48598,7 @@
 	}
 
 /***/ },
-/* 408 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(364)();
@@ -48556,7 +48614,7 @@
 	};
 
 /***/ },
-/* 409 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48570,7 +48628,7 @@
 
 	var _redux = __webpack_require__(105);
 
-	var _middleware = __webpack_require__(410);
+	var _middleware = __webpack_require__(411);
 
 	var _reducers = __webpack_require__(420);
 
@@ -48604,7 +48662,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 410 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48616,19 +48674,19 @@
 	});
 	exports.api = exports.alert = exports.countdown = exports.checkQuestions = undefined;
 
-	var _checkQuestions = __webpack_require__(411);
+	var _checkQuestions = __webpack_require__(412);
 
 	var _checkQuestions2 = _interopRequireDefault(_checkQuestions);
 
-	var _countdown = __webpack_require__(413);
+	var _countdown = __webpack_require__(414);
 
 	var _countdown2 = _interopRequireDefault(_countdown);
 
-	var _api = __webpack_require__(414);
+	var _api = __webpack_require__(415);
 
 	var _api2 = _interopRequireDefault(_api);
 
-	var _alert = __webpack_require__(418);
+	var _alert = __webpack_require__(419);
 
 	var _alert2 = _interopRequireDefault(_alert);
 
@@ -48642,7 +48700,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 411 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48655,7 +48713,7 @@
 
 	var _actions = __webpack_require__(360);
 
-	var _config = __webpack_require__(412);
+	var _config = __webpack_require__(413);
 
 	var answers_url = _config.config.urls.answers;
 
@@ -48685,7 +48743,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "checkQuestions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 412 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48707,7 +48765,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "config.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 413 */
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48789,7 +48847,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "countdown.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 414 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(fetch) {/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -48806,7 +48864,7 @@
 
 	var _actions = __webpack_require__(360);
 
-	var _config = __webpack_require__(412);
+	var _config = __webpack_require__(413);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48905,10 +48963,10 @@
 	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "api.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(415)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(416)))
 
 /***/ },
-/* 415 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Promise, global) {/*** IMPORTS FROM imports-loader ***/
@@ -49371,10 +49429,10 @@
 	/*** EXPORTS FROM exports-loader ***/
 	module.exports = global.fetch;
 	}.call(global));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(416), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(417), (function() { return this; }())))
 
 /***/ },
-/* 416 */
+/* 417 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(process, Promise, global) {/*!
@@ -49513,7 +49571,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(417);
+	    var vertx = __webpack_require__(418);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -50534,72 +50592,13 @@
 
 	})));
 	//# sourceMappingURL=es6-promise.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(207), __webpack_require__(416), (function() { return this; }())))
-
-/***/ },
-/* 417 */
-/***/ function(module, exports) {
-
-	/* (ignored) */
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(207), __webpack_require__(417), (function() { return this; }())))
 
 /***/ },
 /* 418 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/andrey/work/gb-test/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _actions = __webpack_require__(360);
-
-	var _alert = __webpack_require__(419);
-
-	var _config = __webpack_require__(412);
-
-	var alertDelay = _config.config.alertDelay;
-
-
-	var showTimeout = null;
-
-	exports.default = function (store) {
-	  return function (next) {
-	    return function (action) {
-	      var type = action.type;
-
-
-	      switch (type) {
-	        case _actions.START_CHALLENGE:
-	          next({
-	            type: _actions.SHOW_ALERT,
-	            payload: {
-	              text: _alert.ALERT_START_CHALLENGE
-	            }
-	          });
-
-	          if (showTimeout) {
-	            clearTimeout(showTimeout);
-	          }
-
-	          showTimeout = setTimeout(function () {
-	            next({
-	              type: _actions.HIDE_ALERT
-	            });
-	          }, alertDelay);
-
-	          return next(action);
-
-	        default:
-	          return next(action);
-	      }
-	    };
-	  };
-	};
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "alert.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* (ignored) */
 
 /***/ },
 /* 419 */
@@ -50612,7 +50611,57 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var ALERT_START_CHALLENGE = exports.ALERT_START_CHALLENGE = 'Тестирование началось';
+
+	var _actions = __webpack_require__(360);
+
+	var _alert = __webpack_require__(403);
+
+	var _config = __webpack_require__(413);
+
+	var alertDelay = _config.config.alertDelay;
+
+
+	var showTimeout = null;
+
+	exports.default = function (store) {
+	  return function (next) {
+	    return function (action) {
+	      var type = action.type;
+
+
+	      var delayedHide = function delayedHide() {
+	        if (showTimeout) {
+	          clearTimeout(showTimeout);
+	        }
+
+	        showTimeout = setTimeout(function () {
+	          next({
+	            type: _actions.HIDE_ALERT
+	          });
+	        }, alertDelay);
+	      };
+
+	      switch (type) {
+	        case _actions.START_CHALLENGE:
+	          next({
+	            type: _actions.SHOW_ALERT,
+	            payload: {
+	              text: _alert.ALERT_START_CHALLENGE
+	            }
+	          });
+
+	          delayedHide();
+	          break;
+
+	        case _actions.SHOW_ALERT:
+	          delayedHide();
+	          break;
+	      }
+
+	      return next(action);
+	    };
+	  };
+	};
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/andrey/work/gb-test/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "alert.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -50922,7 +50971,7 @@
 
 	var _actions = __webpack_require__(360);
 
-	var _config = __webpack_require__(412);
+	var _config = __webpack_require__(413);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50938,8 +50987,19 @@
 	  return (0, _extends3.default)({}, state, {
 	    isOn: false
 	  });
-	}), (0, _defineProperty3.default)(_handleActions, _actions.COUNTDOWN + _actions.TICK, function (state, _ref2) {
-	  var payload = _ref2.payload;
+	}), (0, _defineProperty3.default)(_handleActions, _actions.COUNTDOWN + _actions.PAUSE, function (state, _ref2) {
+	  var time = _ref2.payload.time;
+	  return (0, _extends3.default)({}, state, {
+	    isOn: false
+	  });
+	}), (0, _defineProperty3.default)(_handleActions, _actions.COUNTDOWN + _actions.RESUME, function (state, _ref3) {
+	  var offset = _ref3.payload.offset;
+	  return (0, _extends3.default)({}, state, {
+	    isOn: true,
+	    offset: offset
+	  });
+	}), (0, _defineProperty3.default)(_handleActions, _actions.COUNTDOWN + _actions.TICK, function (state, _ref4) {
+	  var payload = _ref4.payload;
 	  return (0, _extends3.default)({}, state, {
 	    time: Math.max(countdown_time + state.offset - payload.time, 0)
 	  });
